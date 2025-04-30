@@ -112,6 +112,12 @@ public class ReleasePageViewModel : ViewModelBase
                 ZipFile.ExtractToDirectory(filePath, extractPath);
                 
                 File.Delete(filePath);
+                
+                var nameParts = SelectedRelease.Name?.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var version = nameParts != null && nameParts.Length >= 2 ? nameParts[1] : "unknown";
+
+                var versionPath = Path.Combine(extractPath, "version.txt");
+                await File.WriteAllTextAsync(versionPath, version);
 
                 DownloadStatus = $"✅ Downloaded and extracted to: {extractPath}";
             }

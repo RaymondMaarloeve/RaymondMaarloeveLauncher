@@ -6,18 +6,23 @@
         xmlns:vm="clr-namespace:RaymondMaarloeveLauncher.ViewModels"
         x:Class="RaymondMaarloeveLauncher.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Width="600" Height="400"
+        Width="800" Height="500"
         Title="Game Launcher">
-    <Grid ColumnDefinitions="200,*" RowDefinitions="*">
-        
+    <Grid ColumnDefinitions="1*,2*" RowDefinitions="*">
         <!-- Lewa kolumna: nawigacja + przycisk -->
-        <StackPanel Grid.Column="0" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <StackPanel Grid.Column="0" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Stretch">
             <!-- Przyciski nawigacyjne (na górze) -->
-            <Button Content="Releases" Margin="0 5" Command="{Binding ShowReleasePageCommand}" Width="150"/>
+            <Button Content="Releases" Margin="0 5" Command="{Binding ShowReleasePageCommand}" HorizontalAlignment="Stretch"/>
+            <TextBlock
+                Text = "{Binding CurrentVersion}"
+                Foreground="Orange"
+                TextAlignment="Center"
+                HorizontalAlignment="Stretch"
+                
+                />
+            <Button Content="Config LLM model" Margin="0 5" Command="{Binding ShowHuggingFacePageCommand}" HorizontalAlignment="Stretch"/>
             <TextBlock/>
-            <Button Content="Config LLM model" Margin="0 5" Command="{Binding ShowHuggingFacePageCommand}" Width="150"/>
-            <TextBlock/>
-            <Button Content="Game Config" Margin="0 5" Command="{Binding ShowConfigPageCommand}" Width="150"/>
+            <Button Content="Game Config" Margin="0 5" Command="{Binding ShowConfigPageCommand}" HorizontalAlignment="Stretch"/>
             <TextBlock/>
         </StackPanel>
         
@@ -26,16 +31,14 @@
                        Text="{Binding LaunchStatus}"
                        TextAlignment="Center"
                        Margin = "10 10 10 -5"
-                       HorizontalAlignment="Left"
+                       HorizontalAlignment="Stretch"
                        VerticalAlignment="Bottom"
-                       Width="150"
                        Foreground="CadetBlue"
             />
             <Button 
                     Content="Launch game"
                     Margin="10"
-                    Width="150"
-                    HorizontalAlignment="Left" 
+                    HorizontalAlignment="Stretch" 
                     VerticalAlignment="Bottom"
                     Command="{Binding LaunchGameCommand}"
             />

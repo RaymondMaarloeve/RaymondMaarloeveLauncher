@@ -29,6 +29,14 @@ public class MainWindowViewModel : ViewModelBase
         get => _launchStatus;
         set => this.RaiseAndSetIfChanged(ref _launchStatus, value);
     }
+    
+    private string _currentVersion = "Not downloaded.";
+    public string CurrentVersion
+    {
+        get => _currentVersion;
+        set => this.RaiseAndSetIfChanged(ref _currentVersion, value);
+    }
+
 
     public MainWindowViewModel()
     {
@@ -48,6 +56,8 @@ public class MainWindowViewModel : ViewModelBase
         CurrentPage = new ReleasePage(); // ustawienie domyślnego widoku
         
         LaunchGameCommand = ReactiveCommand.Create(LaunchGame);
+        
+        LoadCurrentVersionFromFile();
     }
     
     private void LaunchGame()
@@ -83,6 +93,28 @@ public class MainWindowViewModel : ViewModelBase
         catch (Exception ex)
         {
             LaunchStatus = $"❌ Game launching error: {ex.Message}";
+        }
+    }
+    
+    public void LoadCurrentVersionFromFile()
+    {
+        try
+        {
+            var versionPath = Path.Combine(AppContext.BaseDirectory, "GameBuild", "version.txt");
+
+            if (File.Exists(versionPath))
+            {
+                var version = File.ReadAllText(versionPath).Trim();
+                CurrentVersion = $"Version: {version}";
+            }
+            else
+            {
+                CurrentVersion = "Not downloaded.";
+            }
+        }
+        catch (Exception ex)
+        {
+            CurrentVersion = $"Error: {ex.Message}";
         }
     }
 
