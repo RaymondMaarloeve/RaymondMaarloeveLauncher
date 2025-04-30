@@ -1,7 +1,11 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="RaymondMaarloeveLauncher.Views.ReleasePage">
-    <Grid>
-        <TextBlock Text="Release selection page (placeholder)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    </Grid>
+             xmlns:vm="clr-namespace:RaymondMaarloeveLauncher.ViewModels"
+             x:Class="RaymondMaarloeveLauncher.Views.ReleasePage"
+             x:DataType="vm:ReleasePageViewModel"
+             >
+    <StackPanel Margin="20">
+        <TextBlock Text="Available game releases:" FontWeight="Bold" FontSize="16" Margin="0 0 0 10"/>
+        <ListBox ItemsSource="{Binding Releases}" />
+    </StackPanel>
 </UserControl>
