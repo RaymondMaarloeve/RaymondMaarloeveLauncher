@@ -1,0 +1,7 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="RaymondMaarloeveLauncher.Views.ReleasePage">
+    <Grid>
+        <TextBlock Text="Release selection page (placeholder)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</UserControl>

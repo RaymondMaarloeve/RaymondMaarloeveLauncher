@@ -1,0 +1,37 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:RaymondMaarloeveLauncher.Views"
+        xmlns:d="https://github.com/avaloniaui"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:RaymondMaarloeveLauncher.ViewModels"
+        x:Class="RaymondMaarloeveLauncher.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Width="600" Height="400"
+        Title="Game Launcher">
+    <Grid ColumnDefinitions="200,*" RowDefinitions="*">
+        
+        <!-- Lewa kolumna: nawigacja + przycisk -->
+        <StackPanel Grid.Column="0" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <!-- Przyciski nawigacyjne (na górze) -->
+            <Button Content="Releases" Margin="0 5" Command="{Binding ShowReleasePageCommand}" Width="150"/>
+            <TextBlock/>
+            <Button Content="Config LLM model" Margin="0 5" Command="{Binding ShowHuggingFacePageCommand}" Width="150"/>
+            <TextBlock/>
+            <Button Content="Game Config" Margin="0 5" Command="{Binding ShowConfigPageCommand}" Width="150"/>
+            <TextBlock/>
+        </StackPanel>
+        
+        <Button Grid.Column="0"
+                Content="Launch game"
+                Margin="10"
+                Width="150"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Bottom"
+                />
+
+        <!-- Prawa kolumna: zawartość -->
+        <ContentControl Grid.Column="1"
+                        Margin="10"
+                        Content="{Binding CurrentPage}" />
+    </Grid>
+</Window>
