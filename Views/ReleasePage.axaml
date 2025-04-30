@@ -20,7 +20,7 @@
                 Command="{Binding DownloadSelectedReleaseCommand}" />
         <TextBlock
             Text="{Binding DownloadStatus}"
-            Foreground="Orange"
+            Foreground="{DynamicResource AccentBrush}"
             Margin="0 10 0 0" 
             />
     </StackPanel>

@@ -13,7 +13,7 @@
         <!-- Lewa kolumna: nawigacja + przycisk -->
         <Grid Grid.Column="0"
               RowDefinitions="Auto,*,Auto"
-              
+              Background="{DynamicResource NavbarBrush}"
               >
             <!-- Background="#1a1a1a" -->
               
@@ -23,7 +23,7 @@
                 <Button Content="Releases" Margin="0 5" Command="{Binding ShowReleasePageCommand}" HorizontalAlignment="Stretch"/>
                 <TextBlock
                     Text = "{Binding CurrentVersion}"
-                    Foreground="Orange"
+                    Foreground="{DynamicResource AccentBrush}"
                     TextAlignment="Center"
                     HorizontalAlignment="Stretch"
                     
@@ -44,7 +44,7 @@
                            Margin = "10 10 10 -5"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Bottom"
-                           Foreground="CadetBlue"
+                           Foreground="{DynamicResource AccentBrush}"
                 />
                 <Button 
                         Content="Launch game"

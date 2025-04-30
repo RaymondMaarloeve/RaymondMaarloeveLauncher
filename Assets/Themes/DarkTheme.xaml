@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="RaymondMaarloeveLauncher.Assets.Themes.DarkTheme"
+                    >
+                    
+    <Color x:Key="NavbarColor">#1a1a1a</Color>
+    <Color x:Key="AccentColor">#ff9800</Color>
+
+    <SolidColorBrush x:Key="NavbarBrush" Color="{StaticResource NavbarColor}"/>
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
+</ResourceDictionary>

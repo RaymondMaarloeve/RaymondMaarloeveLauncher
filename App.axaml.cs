@@ -3,7 +3,9 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Styling;
 using RaymondMaarloeveLauncher.ViewModels;
 using RaymondMaarloeveLauncher.Views;
 
@@ -20,6 +22,14 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
+            var theme = ActualThemeVariant ?? ThemeVariant.Light;
+
+            ResourceDictionary themeDict = theme == ThemeVariant.Dark
+                ? new Assets.Themes.DarkTheme()
+                : new Assets.Themes.LightTheme();
+
+            Resources.MergedDictionaries.Add(themeDict);
+            
             // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
