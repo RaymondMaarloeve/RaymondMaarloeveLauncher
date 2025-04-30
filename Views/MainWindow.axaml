@@ -21,13 +21,28 @@
             <TextBlock/>
         </StackPanel>
         
-        <Button Grid.Column="0"
-                Content="Launch game"
-                Margin="10"
-                Width="150"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Bottom"
-                />
+        <StackPanel Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+            <TextBlock   
+                       Text="{Binding LaunchStatus}"
+                       TextAlignment="Center"
+                       Margin = "10 10 10 -5"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       Width="150"
+                       Foreground="CadetBlue"
+            />
+            <Button 
+                    Content="Launch game"
+                    Margin="10"
+                    Width="150"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Bottom"
+                    Command="{Binding LaunchGameCommand}"
+            />
+            
+        </StackPanel>
+        
+
 
         <!-- Prawa kolumna: zawartość -->
         <ContentControl Grid.Column="1"
