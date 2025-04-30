@@ -8,42 +8,54 @@
         x:DataType="vm:MainWindowViewModel"
         Width="800" Height="500"
         Title="Game Launcher">
+    
     <Grid ColumnDefinitions="1*,2*" RowDefinitions="*">
         <!-- Lewa kolumna: nawigacja + przycisk -->
-        <StackPanel Grid.Column="0" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-            <!-- Przyciski nawigacyjne (na górze) -->
-            <Button Content="Releases" Margin="0 5" Command="{Binding ShowReleasePageCommand}" HorizontalAlignment="Stretch"/>
-            <TextBlock
-                Text = "{Binding CurrentVersion}"
-                Foreground="Orange"
-                TextAlignment="Center"
-                HorizontalAlignment="Stretch"
-                
-                />
-            <Button Content="Config LLM model" Margin="0 5" Command="{Binding ShowHuggingFacePageCommand}" HorizontalAlignment="Stretch"/>
-            <TextBlock/>
-            <Button Content="Game Config" Margin="0 5" Command="{Binding ShowConfigPageCommand}" HorizontalAlignment="Stretch"/>
-            <TextBlock/>
-        </StackPanel>
+        <Grid Grid.Column="0"
+              RowDefinitions="Auto,*,Auto"
+              
+              >
+            <!-- Background="#1a1a1a" -->
+              
         
-        <StackPanel Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
-            <TextBlock   
-                       Text="{Binding LaunchStatus}"
-                       TextAlignment="Center"
-                       Margin = "10 10 10 -5"
-                       HorizontalAlignment="Stretch"
-                       VerticalAlignment="Bottom"
-                       Foreground="CadetBlue"
-            />
-            <Button 
-                    Content="Launch game"
-                    Margin="10"
-                    HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Bottom"
-                    Command="{Binding LaunchGameCommand}"
-            />
+            <StackPanel Grid.Row="0" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                <!-- Przyciski nawigacyjne (na górze) -->
+                <Button Content="Releases" Margin="0 5" Command="{Binding ShowReleasePageCommand}" HorizontalAlignment="Stretch"/>
+                <TextBlock
+                    Text = "{Binding CurrentVersion}"
+                    Foreground="Orange"
+                    TextAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    
+                    />
+                <Button Content="Config LLM model" Margin="0 5" Command="{Binding ShowHuggingFacePageCommand}" HorizontalAlignment="Stretch"/>
+                <TextBlock/>
+                <Button Content="Game Config" Margin="0 5" Command="{Binding ShowConfigPageCommand}" HorizontalAlignment="Stretch"/>
+                <TextBlock/>
+            </StackPanel>
             
-        </StackPanel>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Stretch">
+            <TextBlock  Margin="10" HorizontalAlignment="Stretch" TextWrapping="Wrap">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</TextBlock>
+            </ScrollViewer>
+            <StackPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                <TextBlock   
+                           Text="{Binding LaunchStatus}"
+                           TextAlignment="Center"
+                           Margin = "10 10 10 -5"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Bottom"
+                           Foreground="CadetBlue"
+                />
+                <Button 
+                        Content="Launch game"
+                        Margin="10"
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Bottom"
+                        Command="{Binding LaunchGameCommand}"
+                />
+                
+            </StackPanel>
+        </Grid>
         
 
 
