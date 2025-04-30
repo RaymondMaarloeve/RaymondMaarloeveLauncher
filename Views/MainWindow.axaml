@@ -6,7 +6,9 @@
         xmlns:vm="clr-namespace:RaymondMaarloeveLauncher.ViewModels"
         x:Class="RaymondMaarloeveLauncher.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Width="800" Height="500"
+        xmlns:md="clr-namespace:Markdown.Avalonia;assembly=Markdown.Avalonia.Tight"
+        xmlns:mdxaml="https://github.com/whistyun/Markdown.Avalonia.Tight"
+        Width="1300" Height="800"
         Title="Game Launcher">
     
     <Grid ColumnDefinitions="1*,2*" RowDefinitions="*">
@@ -34,9 +36,14 @@
                 <TextBlock/>
             </StackPanel>
             
-            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Stretch">
-            <TextBlock  Margin="10" HorizontalAlignment="Stretch" TextWrapping="Wrap">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</TextBlock>
-            </ScrollViewer>
+            <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Margin="10">
+                <TextBlock Margin="10 0 10 0" HorizontalAlignment="Stretch" FontStyle="Italic">Newest release info:</TextBlock>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Stretch">
+                    <mdxaml:MarkdownScrollViewer Markdown="{Binding LatestReleaseBody}"  Margin="10" HorizontalAlignment="Stretch" />
+                </ScrollViewer>
+            </StackPanel>
+                
+                
             <StackPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
                 <TextBlock   
                            Text="{Binding LaunchStatus}"
@@ -44,7 +51,7 @@
                            Margin = "10 10 10 -5"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Bottom"
-                           Foreground="{DynamicResource AccentBrush}"
+                           Foreground="{DynamicResource AccentBrush} "
                 />
                 <Button 
                         Content="Launch game"

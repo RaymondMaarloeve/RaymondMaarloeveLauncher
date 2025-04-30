@@ -5,6 +5,9 @@ using Avalonia.Controls;
 using RaymondMaarloeveLauncher.Views;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Octokit;
 
 namespace RaymondMaarloeveLauncher.ViewModels;
 
@@ -36,6 +39,14 @@ public class MainWindowViewModel : ViewModelBase
         get => _currentVersion;
         set => this.RaiseAndSetIfChanged(ref _currentVersion, value);
     }
+    
+    private string _latestReleaseBody;
+    public string LatestReleaseBody
+    {
+        get => _latestReleaseBody;
+        set => this.RaiseAndSetIfChanged(ref _latestReleaseBody, value);
+    }
+
 
 
     public MainWindowViewModel()
@@ -58,6 +69,56 @@ public class MainWindowViewModel : ViewModelBase
         LaunchGameCommand = ReactiveCommand.Create(LaunchGame);
         
         LoadCurrentVersionFromFile();
+
+        _ = LoadLatestReleaseDescription();
+    }
+    
+    public async Task LoadLatestReleaseDescription()
+    {
+        var client = new GitHubClient(new ProductHeaderValue("GameLauncher"));
+
+        try
+        {
+            var latest = await client.Repository.Release.GetLatest("Gitmanik", "RaymondMaarloeve");
+            if (latest.Body == null)
+            {
+                LatestReleaseBody = "No description.";
+                return;
+            }
+            var cleanedBody = RemoveMarkdownTitle(latest.Body);
+            LatestReleaseBody = FormatMarkdownCommits(cleanedBody);
+        }
+        catch (Exception ex)
+        {
+            LatestReleaseBody = $"❌ Error loading changelog:\n{ex.Message}";
+        }
+    }
+    
+    private string FormatMarkdownCommits(string markdown)
+    {
+        var lines = markdown.Split('\n')
+            .Select(line =>
+            {
+                // detect lines starting with 7-character commit ID
+                if (System.Text.RegularExpressions.Regex.IsMatch(line.Trim(), @"^[0-9a-f]{7}\b"))
+                    return "- " + line.Trim(); // change to md list item
+                return line;
+            });
+
+        return string.Join("\n", lines);
+    }
+    
+    private string RemoveMarkdownTitle(string markdown)
+    {
+        if (string.IsNullOrWhiteSpace(markdown))
+            return string.Empty;
+
+        var lines = markdown.Split('\n')
+            .SkipWhile(line => line.TrimStart().StartsWith("#")) 
+            .SkipWhile(string.IsNullOrWhiteSpace) 
+            .ToList();
+
+        return string.Join('\n', lines);
     }
     
     private void LaunchGame()
