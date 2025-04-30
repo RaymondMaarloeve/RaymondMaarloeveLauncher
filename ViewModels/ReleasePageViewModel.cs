@@ -110,6 +110,8 @@ public class ReleasePageViewModel : ViewModelBase
                     Directory.Delete(extractPath, true);
 
                 ZipFile.ExtractToDirectory(filePath, extractPath);
+                
+                File.Delete(filePath);
 
                 DownloadStatus = $"✅ Downloaded and extracted to: {extractPath}";
             }
