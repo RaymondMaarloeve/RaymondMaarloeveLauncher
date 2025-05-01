@@ -7,7 +7,7 @@
 A modern, cross-platform launcher for the **Raymond Maarloeve** game project, built with [Avalonia UI](https://avaloniaui.net/).
 
 <p align="center">
-  <img src="/preview.png" alt="Launcher Preview" width="600"/>
+  <img src="https://github.com/cyptrix12/RaymondMaarloeveLauncher/blob/master/Preview.png" alt="Launcher Preview" width="600"/>
 </p>
 
 ## ✨ Features
