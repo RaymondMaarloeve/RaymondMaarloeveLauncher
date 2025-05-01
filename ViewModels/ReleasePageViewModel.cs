@@ -1,4 +1,5 @@
 ﻿using System;
+using Avalonia;
 using Octokit;
 using ReactiveUI;
 using System.Collections.ObjectModel;
@@ -7,6 +8,8 @@ using System.Net.Http;
 using System.Reactive;
 using System.Threading.Tasks;
 using System.IO.Compression;
+using Avalonia.Controls.ApplicationLifetimes;
+using MainWindowViewModel = RaymondMaarloeveLauncher.ViewModels.MainWindowViewModel;
 
 
 namespace RaymondMaarloeveLauncher.ViewModels;
@@ -120,6 +123,12 @@ public class ReleasePageViewModel : ViewModelBase
                 await File.WriteAllTextAsync(versionPath, version);
 
                 DownloadStatus = $"✅ Downloaded and extracted to: {extractPath}";
+                
+                if (Avalonia.Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime lifetime
+                    && lifetime.MainWindow?.DataContext is MainWindowViewModel mainVm)
+                {
+                    mainVm.LoadCurrentVersionFromFile();
+                }
             }
             else
             {
