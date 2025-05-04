@@ -18,15 +18,19 @@
                              Value="{Binding DownloadProgress}"/>
                 <TextBlock Text="{Binding ProgressText}" VerticalAlignment="Center"/>
             </StackPanel>
-            <TextBlock Text="{Binding DownloadStatus}" Foreground="Orange"/>
+            <TextBlock Text="{Binding DownloadStatus}" Foreground="{DynamicResource AccentBrush}"/>
         </StackPanel>
 
         <!-- DOLNY RZĄD: rezerwujemy -->
-        <Border Grid.Row="1" Background="#222" Margin="0,20,0,0">
-            <TextBlock Text="(Reserved for future settings)"
-                       Foreground="Gray"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"/>
-        </Border>
+        <StackPanel Grid.Row="1" Margin="0,20,0,0" Spacing="10">
+            <TextBlock Text="Installed local models:" FontWeight="Bold" FontSize="14"/>
+            <ListBox ItemsSource="{Binding LocalModels}" 
+                     SelectedItem="{Binding SelectedLocalModel}" 
+                     Height="120"/>
+            <Button Content="🗑 Delete selected model"
+                    Command="{Binding DeleteModelCommand}"
+                    IsEnabled="{Binding SelectedLocalModel, Converter={StaticResource NullToBoolConverter}}"/>
+            <TextBlock Text="{Binding LocalModelsStatus}" Foreground="{DynamicResource AccentBrush}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

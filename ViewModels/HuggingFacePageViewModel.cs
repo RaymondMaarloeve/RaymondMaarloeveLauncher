@@ -16,6 +16,8 @@ public class HuggingFacePageViewModel : ReactiveObject
     private static readonly HttpClient _httpClient = new();
 
     public ObservableCollection<string> AvailableModels { get; } = new();
+    
+    public ObservableCollection<string> LocalModels { get; } = new();
 
     private string? _selectedModel;
     public string? SelectedModel
@@ -23,12 +25,27 @@ public class HuggingFacePageViewModel : ReactiveObject
         get => _selectedModel;
         set => this.RaiseAndSetIfChanged(ref _selectedModel, value);
     }
+    
+    private string? _selectedLocalModel;
+    public string? SelectedLocalModel
+    {
+        get => _selectedLocalModel;
+        set => this.RaiseAndSetIfChanged(ref _selectedLocalModel, value);
+    }
 
     private string _downloadStatus = "";
     public string DownloadStatus
     {
         get => _downloadStatus;
         set => this.RaiseAndSetIfChanged(ref _downloadStatus, value);
+    }
+
+    private string _localModelsStatus = "";
+
+    public string LocalModelsStatus
+    {
+        get => _localModelsStatus;
+        set => this.RaiseAndSetIfChanged(ref _localModelsStatus, value);
     }
     
     private double _downloadProgress;
@@ -47,14 +64,22 @@ public class HuggingFacePageViewModel : ReactiveObject
 
     public ReactiveCommand<Unit, Unit> DownloadModelCommand { get; }
     public ReactiveCommand<Unit, Unit> LoadModelsCommand { get; }
+    
+    public ReactiveCommand<Unit, Unit> LoadLocalModelsCommand { get; }
+    
+    public ReactiveCommand<Unit, Unit> DeleteModelCommand { get; }
 
     public HuggingFacePageViewModel()
     {
         DownloadModelCommand = ReactiveCommand.CreateFromTask(DownloadSelectedModelAsync);
         LoadModelsCommand = ReactiveCommand.CreateFromTask(LoadAvailableModelsAsync);
         
+        LoadLocalModelsCommand = ReactiveCommand.CreateFromTask(LoadLocalModelsAsync);
+        DeleteModelCommand = ReactiveCommand.CreateFromTask(DeleteSelectedLocalModelAsync);
+        
 
         // automatyczne ładowanie modeli przy starcie
+        _ = LoadLocalModelsAsync();
         _ = LoadAvailableModelsAsync();
     }
 
@@ -73,7 +98,7 @@ public class HuggingFacePageViewModel : ReactiveObject
             
 
             var ggufFiles = files!
-                .Where(f => f.type == "file")
+                .Where(f => f.type == "file" && f.path.EndsWith(".gguf") )
                 .Select(f => f.path)
                 .ToList();
 
@@ -144,4 +169,42 @@ public class HuggingFacePageViewModel : ReactiveObject
         public string type { get; set; } = "";
         public string path { get; set; } = "";
     }
+    
+    private async Task LoadLocalModelsAsync()
+    {
+        try
+        {
+            Directory.CreateDirectory("Models");
+            var files = Directory.GetFiles("Models", "*.gguf");
+            
+            LocalModels.Clear();
+            foreach (var file in files)
+                LocalModels.Add(Path.GetFileName(file));
+        }
+        catch
+        {
+            LocalModelsStatus = "❌ Failed to load local models.";
+        }
+    }
+
+    private async Task DeleteSelectedLocalModelAsync()
+    {
+        if (SelectedLocalModel is null)
+            return;
+
+        var path = Path.Combine("Models", SelectedLocalModel);
+        try
+        {
+            if (File.Exists(path))
+                File.Delete(path);
+
+            await LoadLocalModelsAsync();
+            LocalModelsStatus = $"🗑 Deleted {SelectedLocalModel}";
+        }
+        catch (Exception ex)
+        {
+            LocalModelsStatus = $"❌ Failed to delete {SelectedLocalModel}: {ex.Message}";
+        }
+    }
+
 }
