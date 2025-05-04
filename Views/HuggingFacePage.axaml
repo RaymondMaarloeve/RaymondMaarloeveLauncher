@@ -1,7 +1,32 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="RaymondMaarloeveLauncher.Views.HuggingFacePage">
-    <Grid>
-        <TextBlock Text="HF selection page (placeholder)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+             xmlns:vm="clr-namespace:RaymondMaarloeveLauncher.ViewModels"
+             x:Class="RaymondMaarloeveLauncher.Views.HuggingFacePage"
+             x:DataType="vm:HuggingFacePageViewModel">
+    <Grid RowDefinitions="Auto,*" Margin="20">
+        <!-- GÓRNY RZĄD: pobieranie modeli -->
+        <StackPanel Grid.Row="0" Spacing="10">
+            <TextBlock Text="Available LLM Models:" FontWeight="Bold" FontSize="16"/>
+            <ListBox ItemsSource="{Binding AvailableModels}"
+                     SelectedItem="{Binding SelectedModel}"
+                     Height="150"/>
+            <Button Content="Download selected model"
+                    Command="{Binding DownloadModelCommand}"
+                    IsEnabled="{Binding SelectedModel, Converter={StaticResource NullToBoolConverter}}"/>
+            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,5">
+                <ProgressBar Width="200" Height="10" Minimum="0" Maximum="100" 
+                             Value="{Binding DownloadProgress}"/>
+                <TextBlock Text="{Binding ProgressText}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <TextBlock Text="{Binding DownloadStatus}" Foreground="Orange"/>
+        </StackPanel>
+
+        <!-- DOLNY RZĄD: rezerwujemy -->
+        <Border Grid.Row="1" Background="#222" Margin="0,20,0,0">
+            <TextBlock Text="(Reserved for future settings)"
+                       Foreground="Gray"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Border>
     </Grid>
 </UserControl>
