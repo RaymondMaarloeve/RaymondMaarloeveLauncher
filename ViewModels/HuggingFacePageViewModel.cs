@@ -120,7 +120,6 @@ public class HuggingFacePageViewModel : ReactiveObject
 
         var modelName = SelectedModel;
         var url = $"https://huggingface.co/wujoq/Reymond_Tuning/resolve/main/{modelName}?download=true";
-        System.Console.WriteLine(url);
 
         try
         {
