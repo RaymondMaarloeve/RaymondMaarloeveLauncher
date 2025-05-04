@@ -4,7 +4,7 @@
              x:Class="RaymondMaarloeveLauncher.Views.HuggingFacePage"
              x:DataType="vm:HuggingFacePageViewModel">
     <Grid RowDefinitions="Auto,*" Margin="20">
-        <!-- GÓRNY RZĄD: pobieranie modeli -->
+        <!-- 1st row: downloading models -->
         <StackPanel Grid.Row="0" Spacing="10">
             <TextBlock Text="Available LLM Models:" FontWeight="Bold" FontSize="16"/>
             <ListBox ItemsSource="{Binding AvailableModels}"
@@ -21,7 +21,7 @@
             <TextBlock Text="{Binding DownloadStatus}" Foreground="{DynamicResource AccentBrush}"/>
         </StackPanel>
 
-        <!-- DOLNY RZĄD: rezerwujemy -->
+        <!-- 2nd row: list of downloaded models -->
         <StackPanel Grid.Row="1" Margin="0,20,0,0" Spacing="10">
             <TextBlock Text="Installed local models:" FontWeight="Bold" FontSize="14"/>
             <ListBox ItemsSource="{Binding LocalModels}" 

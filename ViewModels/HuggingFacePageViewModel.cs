@@ -78,7 +78,6 @@ public class HuggingFacePageViewModel : ReactiveObject
         DeleteModelCommand = ReactiveCommand.CreateFromTask(DeleteSelectedLocalModelAsync);
         
 
-        // automatyczne ładowanie modeli przy starcie
         _ = LoadLocalModelsAsync();
         _ = LoadAvailableModelsAsync();
     }
