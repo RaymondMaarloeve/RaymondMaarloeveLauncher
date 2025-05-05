@@ -63,7 +63,14 @@ public class ReleasePageViewModel : ViewModelBase
 
     public ReleasePageViewModel()
     {
-        LoadReleases();
+        try
+        {
+            LoadReleases();
+        }
+        catch (Exception e)
+        {
+            DownloadStatus = $"❌ Unexpected error: {e.Message}";
+        }
 
         DownloadSelectedReleaseCommand = ReactiveCommand.CreateFromTask(DownloadSelectedReleaseAsync);
     }
