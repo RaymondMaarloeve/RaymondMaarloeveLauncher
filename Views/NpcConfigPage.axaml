@@ -1,37 +1,21 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:RaymondMaarloeveLauncher.ViewModels"
+             xmlns:views="clr-namespace:RaymondMaarloeveLauncher.Views"
              xmlns:models="clr-namespace:RaymondMaarloeveLauncher.Models"
              x:Class="RaymondMaarloeveLauncher.Views.NpcConfigPage"
              x:DataType="vm:NpcConfigPageViewModel">
 
-    <StackPanel Margin="20" Spacing="10">
-        <ComboBox Width="200"
-        ItemsSource="{Binding AvailableModels}"/>
+    <StackPanel>
         <ItemsControl ItemsSource="{Binding Npcs}">
             <ItemsControl.ItemTemplate>
-                <DataTemplate x:DataType="models:NpcModel">
-                    <DockPanel Margin="0,5">
-                        
-                        <Button Content="🗑" 
-                                Command="{Binding RemoveNpcCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=vm:NpcConfigPageViewModel}}"
-                                CommandParameter="{Binding}" 
-                                DockPanel.Dock="Right"
-                                Margin="5,0,0,0"/>
-
-                        <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="0,0,10,0"/>
-                        <ComboBox Width="200"
-                                  ItemsSource="{Binding AvailableModels, RelativeSource={RelativeSource AncestorType=vm:NpcConfigPageViewModel}}"
-                                  SelectedItem="{Binding SelectedModel}" />
-                    </DockPanel>
+                <DataTemplate>
+                    <views:NpcEntryView />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <Button Content="+ Add NPC"
-                Command="{Binding AddNpcCommand}"
-                Width="120"
-                HorizontalAlignment="Left"
-                Margin="0,10,0,0"/>
+        <Button Content="+ Add NPC" Command="{Binding AddNpcCommand}" Margin="0,10,0,0"/>
     </StackPanel>
+
 </UserControl>
