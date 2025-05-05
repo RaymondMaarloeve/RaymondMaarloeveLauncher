@@ -24,17 +24,8 @@
                 <!-- Przyciski nawigacyjne (na górze) -->
                 <Button Content="Home Page" Margin="0 5" Command="{Binding ShowHomePageCommand}" HorizontalAlignment="Stretch" FontSize="20"/>
                 <Button Content="Releases" Margin="0 5" Command="{Binding ShowReleasePageCommand}" HorizontalAlignment="Stretch" FontSize="20"/>
-                <TextBlock
-                    Text = "{Binding CurrentVersion}"
-                    Foreground="{DynamicResource AccentBrush}"
-                    TextAlignment="Center"
-                    HorizontalAlignment="Stretch"
-                    
-                    />
                 <Button Content="Config LLM model" Margin="0 5" Command="{Binding ShowHuggingFacePageCommand}" HorizontalAlignment="Stretch" FontSize="20"/>
-                <TextBlock/>
                 <Button Content="Game Config" Margin="0 5" Command="{Binding ShowConfigPageCommand}" HorizontalAlignment="Stretch" FontSize="20"/>
-                <TextBlock/>
             </StackPanel>
             
             <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Margin="10">
@@ -61,6 +52,13 @@
                         HorizontalAlignment="Stretch" 
                         VerticalAlignment="Bottom"
                         Command="{Binding LaunchGameCommand}"
+                />
+                <TextBlock
+                    Text = "{Binding CurrentVersion}"
+                    Foreground="{DynamicResource AccentBrush}"
+                    TextAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    Margin="0 0 0 10"
                 />
                 
             </StackPanel>
