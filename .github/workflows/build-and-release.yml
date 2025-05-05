@@ -20,10 +20,14 @@ jobs:
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0  # This fetches the entire history
 
       - name: Get commit history since last release
         id: changelog
+        shell: bash
         run: |
           # Get the last tag (release), or fallback to the first commit if no tags are found
           LAST_RELEASE=$(git describe --tags --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)
