@@ -57,7 +57,7 @@ jobs:
           ARCH: x86_64
         run: |
           # Publish single-file self-contained
-          dotnet publish ./YourSolution.sln \
+          dotnet publish ./RaymondMaarloeveLauncher.sln \
             -c Release \
             -r ${{ matrix.rid }} \
             --self-contained true \
