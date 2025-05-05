@@ -27,6 +27,20 @@ public class ReleasePageViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _selectedRelease, value);
     }
 
+    private double _downloadProgress;
+    public double DownloadProgress
+    {
+        get => _downloadProgress;
+        set => this.RaiseAndSetIfChanged(ref _downloadProgress, value);
+    }
+
+    private string _progressText = "";
+    public string ProgressText
+    {
+        get => _progressText;
+        set => this.RaiseAndSetIfChanged(ref _progressText, value);
+    }
+
     private async void LoadReleases()
     {
         var client = new GitHubClient(new ProductHeaderValue("GameLauncher"));
@@ -76,46 +90,62 @@ public class ReleasePageViewModel : ViewModelBase
             var url = asset.BrowserDownloadUrl;
 
             DownloadStatus = $"🔄 Downloading file: {asset.Name}...";
-
-            using var httpClient = new HttpClient();
-
-            byte[] bytes;
-            try
-            {
-                bytes = await httpClient.GetByteArrayAsync(url);
-            }
-            catch (Exception ex)
-            {
-                DownloadStatus = $"❌ Download error: {ex.Message}";
-                return;
-            }
+            ProgressText = "0%";
+            DownloadProgress = 0;
 
             var installPath = AppContext.BaseDirectory;
             var filePath = Path.Combine(installPath, asset.Name);
 
             try
             {
-                await File.WriteAllBytesAsync(filePath, bytes);
+                using var httpClient = new HttpClient();
+                using var response = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+                response.EnsureSuccessStatusCode();
+
+                var totalBytes = response.Content.Headers.ContentLength ?? -1L;
+                var canReportProgress = totalBytes > 0;
+
+                await using var remoteStream = await response.Content.ReadAsStreamAsync();
+                await using var localFileStream = File.Create(filePath);
+
+                var buffer = new byte[81920];
+                long totalRead = 0;
+                int bytesRead;
+
+                while ((bytesRead = await remoteStream.ReadAsync(buffer)) > 0)
+                {
+                    await localFileStream.WriteAsync(buffer.AsMemory(0, bytesRead));
+                    totalRead += bytesRead;
+
+                    if (canReportProgress)
+                    {
+                        double percent = (double)totalRead / totalBytes * 100;
+                        DownloadProgress = percent;
+                        ProgressText = $"{percent:F1}%";
+                    }
+                }
+
+                ProgressText = "✅ Done";
             }
             catch (Exception ex)
             {
-                DownloadStatus = $"❌ Failed to save file:\n{ex.Message}";
+                ProgressText = "";
+                DownloadProgress = 0;
+                DownloadStatus = $"❌ Download error: {ex.Message}";
                 return;
             }
 
-                            
+            // Extract ZIP
             if (Path.GetExtension(filePath).Equals(".zip", StringComparison.OrdinalIgnoreCase))
             {
-                var extractPath = Path.Combine(Path.GetDirectoryName(filePath), "GameBuild");
+                var extractPath = Path.Combine(Path.GetDirectoryName(filePath)!, "GameBuild");
 
-                // Upewnij się, że folder docelowy nie istnieje lub go wyczyść
                 if (Directory.Exists(extractPath))
                     Directory.Delete(extractPath, true);
 
                 ZipFile.ExtractToDirectory(filePath, extractPath);
-                
                 File.Delete(filePath);
-                
+
                 var nameParts = SelectedRelease.Name?.Split(' ', StringSplitOptions.RemoveEmptyEntries);
                 var version = nameParts != null && nameParts.Length >= 2 ? nameParts[1] : "unknown";
 
@@ -123,7 +153,7 @@ public class ReleasePageViewModel : ViewModelBase
                 await File.WriteAllTextAsync(versionPath, version);
 
                 DownloadStatus = $"✅ Downloaded and extracted to: {extractPath}";
-                
+
                 if (Avalonia.Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime lifetime
                     && lifetime.MainWindow?.DataContext is MainWindowViewModel mainVm)
                 {
@@ -137,6 +167,8 @@ public class ReleasePageViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
+            DownloadProgress = 0;
+            ProgressText = "";
             DownloadStatus = $"❌ Unexpected error: {ex.Message}";
         }
     }

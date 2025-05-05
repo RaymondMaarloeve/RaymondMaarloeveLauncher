@@ -22,6 +22,11 @@
                     Margin="0 10 0 0"
                     Command="{Binding DownloadSelectedReleaseCommand}" 
                     IsEnabled="{Binding SelectedRelease, Converter={StaticResource NullToBoolConverter}}"/>
+            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,5">
+                <ProgressBar Width="200" Height="10" Minimum="0" Maximum="100"
+                             Value="{Binding DownloadProgress}"/>
+                <TextBlock Text="{Binding ProgressText}" VerticalAlignment="Center"/>
+            </StackPanel>
             <TextBlock
                 Text="{Binding DownloadStatus}"
                 Foreground="{DynamicResource AccentBrush}"
