@@ -1,7 +1,23 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="RaymondMaarloeveLauncher.Views.ConfigPage">
-    <Grid>
-        <TextBlock Text="Config selection page (placeholder)" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    </Grid>
+             xmlns:vm="clr-namespace:RaymondMaarloeveLauncher.ViewModels"
+             x:Class="RaymondMaarloeveLauncher.Views.ConfigPage"
+             x:DataType="vm:ConfigPageViewModel">
+    
+    <StackPanel Spacing="10" Margin="20">
+        <TextBlock Text="Game Configuration" FontSize="16" FontWeight="Bold"/>
+
+        <TextBlock Text="LLM Server API:"/>
+        <TextBox Text="{Binding LlmServerApi}" Width="300" HorizontalAlignment="Left"/>
+
+        <TextBlock Text="Resolution:"/>
+        <ComboBox ItemsSource="{Binding AvailableResolutions}"
+                  SelectedItem="{Binding Resolution}" Width="150"/>
+
+        <CheckBox Content="Fullscreen" IsChecked="{Binding FullScreen}"/>
+
+        <Button Content="Save Configuration"
+                Command="{Binding SaveCommand}"
+                Width="180" HorizontalAlignment="Left"/>
+    </StackPanel>
 </UserControl>
