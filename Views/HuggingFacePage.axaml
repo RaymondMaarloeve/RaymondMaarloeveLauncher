@@ -3,34 +3,46 @@
              xmlns:vm="clr-namespace:RaymondMaarloeveLauncher.ViewModels"
              x:Class="RaymondMaarloeveLauncher.Views.HuggingFacePage"
              x:DataType="vm:HuggingFacePageViewModel">
-    <Grid RowDefinitions="Auto,*" Margin="20">
+ 
+    <Grid RowDefinitions="*,*" Margin="20">
+
         <!-- 1st row: downloading models -->
-        <StackPanel Grid.Row="0" Spacing="10">
-            <TextBlock Text="Available LLM Models:" FontWeight="Bold" FontSize="16"/>
-            <ListBox ItemsSource="{Binding AvailableModels}"
-                     SelectedItem="{Binding SelectedModel}"
-                     Height="150"/>
-            <Button Content="Download selected model"
-                    Command="{Binding DownloadModelCommand}"
-                    IsEnabled="{Binding SelectedModel, Converter={StaticResource NullToBoolConverter}}"/>
-            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,5">
-                <ProgressBar Width="200" Height="10" Minimum="0" Maximum="100" 
-                             Value="{Binding DownloadProgress}"/>
-                <TextBlock Text="{Binding ProgressText}" VerticalAlignment="Center"/>
+        
+        <Grid Grid.Row="0" RowDefinitions="Auto,*,Auto" Margin="20">
+            <TextBlock Grid.Row="0" Text="Available LLM Models:" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10">
+                <ListBox  ItemsSource="{Binding AvailableModels}"
+                         SelectedItem="{Binding SelectedModel}" />
+            </ScrollViewer>
+            <StackPanel Grid.Row="2" Margin="0,0,0,10">
+                <Button Content="Download selected model"
+                        Command="{Binding DownloadModelCommand}"
+                        IsEnabled="{Binding SelectedModel, Converter={StaticResource NullToBoolConverter}}"/>
+                <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,5">
+                    <ProgressBar Width="200" Height="10" Minimum="0" Maximum="100" 
+                                 Value="{Binding DownloadProgress}"/>
+                    <TextBlock Text="{Binding ProgressText}" VerticalAlignment="Center"/>
+                </StackPanel>
+                <TextBlock Text="{Binding DownloadStatus}" Foreground="{DynamicResource AccentBrush}"/>
             </StackPanel>
-            <TextBlock Text="{Binding DownloadStatus}" Foreground="{DynamicResource AccentBrush}"/>
-        </StackPanel>
+        </Grid>
+        
 
         <!-- 2nd row: list of downloaded models -->
-        <StackPanel Grid.Row="1" Margin="0,20,0,0" Spacing="10">
-            <TextBlock Text="Installed local models:" FontWeight="Bold" FontSize="14"/>
-            <ListBox ItemsSource="{Binding LocalModels}" 
-                     SelectedItem="{Binding SelectedLocalModel}" 
-                     Height="120"/>
-            <Button Content="🗑 Delete selected model"
-                    Command="{Binding DeleteModelCommand}"
-                    IsEnabled="{Binding SelectedLocalModel, Converter={StaticResource NullToBoolConverter}}"/>
-            <TextBlock Text="{Binding LocalModelsStatus}" Foreground="{DynamicResource AccentBrush}"/>
-        </StackPanel>
+        
+        <Grid Grid.Row="1" RowDefinitions="Auto,*,Auto" Margin="20">
+            <TextBlock Grid.Row="0" Text="Installed local models:" FontWeight="Bold" FontSize="14" Margin="0,0,0,10"/>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10">
+                <ListBox ItemsSource="{Binding LocalModels}" 
+                         SelectedItem="{Binding SelectedLocalModel}" />
+            </ScrollViewer>
+            <StackPanel Grid.Row="2" Margin="0,0,0,10">
+                <Button Content="🗑 Delete selected model"
+                        Command="{Binding DeleteModelCommand}"
+                        IsEnabled="{Binding SelectedLocalModel, Converter={StaticResource NullToBoolConverter}}"/>
+                <TextBlock Text="{Binding LocalModelsStatus}" Foreground="{DynamicResource AccentBrush}"/>
+            </StackPanel>
+        </Grid>
+        
     </Grid>
 </UserControl>
