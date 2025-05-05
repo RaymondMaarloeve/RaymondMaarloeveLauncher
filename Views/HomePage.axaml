@@ -1,0 +1,32 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="RaymondMaarloeveLauncher.Views.HomePage">
+    <ScrollViewer Margin="20">
+        <StackPanel Spacing="10">
+            <TextBlock Text="🎮 Welcome to Raymond Maarloeve Launcher" 
+                       FontSize="20" FontWeight="Bold" />
+
+            <TextBlock Text="This launcher allows you to:" FontSize="14" />
+
+            <ItemsControl>
+                <ItemsControl.Items>
+                    <TextBlock Text="• Download and update the latest version of the game." />
+                    <TextBlock Text="• Manage LLM models for in-game AI features." />
+                    <TextBlock Text="• Configure game resolution, fullscreen, and LLM server API." />
+                    <TextBlock Text="• Launch the game with the selected configuration." />
+                </ItemsControl.Items>
+            </ItemsControl>
+
+            <TextBlock Text="👉 Use the buttons on the left to navigate through the setup steps." 
+                       Margin="0,10,0,0" />
+
+            <TextBlock Text="Once everything is ready, click 'Launch Game' at the bottom to play!" 
+                       FontWeight="SemiBold" Margin="0,5,0,0" />
+
+            <TextBlock Text="Note: If you run this launcher without an internet connection, only locally available models and builds will be accessible."
+                       FontStyle="Italic"
+                       Foreground="Gray"
+                       Margin="0,20,0,0" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -13,6 +13,7 @@ namespace RaymondMaarloeveLauncher.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
+    public ReactiveCommand<Unit, Unit> ShowHomePageCommand { get; }
     public ReactiveCommand<Unit, Unit> ShowReleasePageCommand { get; }
     public ReactiveCommand<Unit, Unit> ShowHuggingFacePageCommand { get; }
     public ReactiveCommand<Unit, Unit> ShowConfigPageCommand { get; }
@@ -51,6 +52,10 @@ public class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel()
     {
+        ShowHomePageCommand = ReactiveCommand.Create(() =>
+        {
+            CurrentPage = new HomePage();
+        });
         ShowReleasePageCommand = ReactiveCommand.Create(() =>
         {
             CurrentPage = new ReleasePage();
@@ -64,7 +69,7 @@ public class MainWindowViewModel : ViewModelBase
             CurrentPage = new ConfigPage();
         });
 
-        CurrentPage = new ReleasePage(); // ustawienie domyślnego widoku
+        CurrentPage = new HomePage(); // ustawienie domyślnego widoku
         
         LaunchGameCommand = ReactiveCommand.Create(LaunchGame);
         

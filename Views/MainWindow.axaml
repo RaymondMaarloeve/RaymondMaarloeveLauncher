@@ -22,6 +22,7 @@
         
             <StackPanel Grid.Row="0" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                 <!-- Przyciski nawigacyjne (na górze) -->
+                <Button Content="Home Page" Margin="0 5" Command="{Binding ShowHomePageCommand}" HorizontalAlignment="Stretch" FontSize="20"/>
                 <Button Content="Releases" Margin="0 5" Command="{Binding ShowReleasePageCommand}" HorizontalAlignment="Stretch" FontSize="20"/>
                 <TextBlock
                     Text = "{Binding CurrentVersion}"
