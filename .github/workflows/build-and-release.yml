@@ -70,15 +70,9 @@ jobs:
             cp publish/* AppDir/usr/bin/
             cp RaymondMaarloeve.desktop AppDir/
             cp icon.png AppDir/
-
-            # Create AppRun launcher
-            cat > AppDir/AppRun << 'EOF'
-#!/usr/bin/env bash
-HERE="$(dirname "$(readlink -f "${0}")")"
-exec "${HERE}/usr/bin/RaymondMaarloeveLauncher" "$@"
-EOF
+            cp AppRun AppDir/
             chmod +x AppDir/AppRun
-          fi
+
 
       - name: Build AppImage
         if: matrix.os == 'ubuntu-latest'
