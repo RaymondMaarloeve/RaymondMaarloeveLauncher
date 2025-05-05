@@ -13,10 +13,10 @@ jobs:
         include:
           - os: windows-latest
             rid: win-x64
-            artifact: RaymondMaarloeve.exe
+            artifact: RaymondMaarloeveLauncher.exe
           - os: ubuntu-latest
             rid: linux-x64
-            artifact: RaymondMaarloeve.AppImage
+            artifact: RaymondMaarloeveLauncher.AppImage
 
     steps:
       - name: Checkout source
@@ -85,8 +85,8 @@ jobs:
           cp icon.png AppDir/
           cp AppRun AppDir/
           chmod +x AppDir/AppRun
-          ./appimagetool-x86_64.AppImage AppDir RaymondMaarloeve.AppImage
-          mv RaymondMaarloeve.AppImage publish/
+          ./appimagetool-x86_64.AppImage AppDir RaymondMaarloeveLauncher.AppImage
+          mv RaymondMaarloeveLauncher.AppImage publish/
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -132,7 +132,7 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: art/windows/RaymondMaarloeve.exe
+          asset_path: art/windows/RaymondMaarloeveLauncher.exe
           asset_name: RaymondMaarloeve-${{ steps.datetime.outputs.current_datetime }}.exe
           asset_content_type: application/octet-stream
 
@@ -140,6 +140,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: art/linux/RaymondMaarloeve.AppImage
+          asset_path: art/linux/RaymondMaarloeveLauncher.AppImage
           asset_name: RaymondMaarloeve-${{ steps.datetime.outputs.current_datetime }}.AppImage
           asset_content_type: application/x-executable
