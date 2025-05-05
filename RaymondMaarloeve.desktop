@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=RaymondMaarloeveLauncher
+Comment=Raymond Maarloeve
+Exec=usr/bin/RaymondMaarloeveLauncher %f
+Icon=icon
+Terminal=false
+Categories=Game;
+StartupWMClass=RaymondMaarloeveLauncher
