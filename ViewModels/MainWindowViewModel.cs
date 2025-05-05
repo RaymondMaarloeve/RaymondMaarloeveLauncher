@@ -17,6 +17,7 @@ public class MainWindowViewModel : ViewModelBase
     public ReactiveCommand<Unit, Unit> ShowReleasePageCommand { get; }
     public ReactiveCommand<Unit, Unit> ShowHuggingFacePageCommand { get; }
     public ReactiveCommand<Unit, Unit> ShowConfigPageCommand { get; }
+    public ReactiveCommand<Unit, Unit> ShowNpcConfigPageCommand { get; }
     
     public ReactiveCommand<Unit, Unit> LaunchGameCommand { get; }
 
@@ -67,6 +68,10 @@ public class MainWindowViewModel : ViewModelBase
         ShowConfigPageCommand = ReactiveCommand.Create(() =>
         {
             CurrentPage = new ConfigPage();
+        });
+        ShowNpcConfigPageCommand = ReactiveCommand.Create(() =>
+        {
+            CurrentPage = new NpcConfigPage();
         });
 
         CurrentPage = new HomePage(); // ustawienie domyślnego widoku

@@ -25,6 +25,7 @@
                 <Button Content="Home Page" Margin="0 5" Command="{Binding ShowHomePageCommand}" HorizontalAlignment="Stretch" FontSize="20"/>
                 <Button Content="Releases" Margin="0 5" Command="{Binding ShowReleasePageCommand}" HorizontalAlignment="Stretch" FontSize="20"/>
                 <Button Content="Config LLM model" Margin="0 5" Command="{Binding ShowHuggingFacePageCommand}" HorizontalAlignment="Stretch" FontSize="20"/>
+                <Button Content="Config Npc's" Margin="0 5" Command="{Binding ShowNpcConfigPageCommand}" HorizontalAlignment="Stretch" FontSize="20"/>
                 <Button Content="Game Config" Margin="0 5" Command="{Binding ShowConfigPageCommand}" HorizontalAlignment="Stretch" FontSize="20"/>
             </StackPanel>
             
