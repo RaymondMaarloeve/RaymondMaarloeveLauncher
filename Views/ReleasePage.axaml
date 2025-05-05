@@ -5,7 +5,7 @@
              x:DataType="vm:ReleasePageViewModel"
              >
     
-    <Grid RowDefinitions="Auto,*,Auto" Margin="20">
+    <Grid RowDefinitions="Auto,Auto,Auto" Margin="20">
         <TextBlock Grid.Row="0" Text="Available game releases:" FontWeight="Bold" FontSize="16" Margin="0 0 0 10"/>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0 0 0 10">
             <ListBox ItemsSource="{Binding Releases}"
