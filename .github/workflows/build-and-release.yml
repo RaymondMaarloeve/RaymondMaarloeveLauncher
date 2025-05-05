@@ -76,7 +76,7 @@ jobs:
             cp icon.png AppDir/
             cp AppRun AppDir/
             chmod +x AppDir/AppRun
-
+          fi
 
       - name: Build AppImage
         if: matrix.os == 'ubuntu-latest'
