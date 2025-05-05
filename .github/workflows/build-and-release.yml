@@ -25,6 +25,12 @@ jobs:
           lfs: true
           fetch-depth: 0  # This fetches the entire history
 
+      - name: Install FUSE on Linux
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fuse
+
       - name: Get commit history since last release
         id: changelog
         shell: bash
@@ -64,23 +70,20 @@ jobs:
             -p:PublishSingleFile=true \
             -o publish
 
-          if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
-            # Download AppImageTool
-            wget -q https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
-            chmod +x appimagetool-x86_64.AppImage
-
-            # Prepare AppDir
-            mkdir -p AppDir/usr/bin
-            cp publish/* AppDir/usr/bin/
-            cp RaymondMaarloeve.desktop AppDir/
-            cp icon.png AppDir/
-            cp AppRun AppDir/
-            chmod +x AppDir/AppRun
-          fi
-
       - name: Build AppImage
         if: matrix.os == 'ubuntu-latest'
         run: |
+          # Download AppImageTool
+          wget -q https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
+          chmod +x appimagetool-x86_64.AppImage
+
+          # Prepare AppDir
+          mkdir -p AppDir/usr/bin
+          cp publish/* AppDir/usr/bin/
+          cp RaymondMaarloeve.desktop AppDir/
+          cp icon.png AppDir/
+          cp AppRun AppDir/
+          chmod +x AppDir/AppRun
           ./appimagetool-x86_64.AppImage AppDir RaymondMaarloeve.AppImage
           mv RaymondMaarloeve.AppImage publish/
 
