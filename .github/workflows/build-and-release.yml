@@ -61,6 +61,7 @@ jobs:
       - name: Publish (${{ matrix.rid }})
         env:
           ARCH: x86_64
+        shell: bash
         run: |
           # Publish single-file self-contained
           dotnet publish ./RaymondMaarloeveLauncher.sln \
