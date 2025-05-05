@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# locate where we were mounted
+HERE="$(dirname "$(readlink -f "${0}")")"
+# exec your single-file exe, passing along any args
+exec "${HERE}/usr/bin/RaymondMaarloeveLauncher" "$@"
