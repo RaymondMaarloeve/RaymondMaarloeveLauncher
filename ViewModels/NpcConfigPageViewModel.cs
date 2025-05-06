@@ -66,16 +66,27 @@ public class NpcConfigPageViewModel : ReactiveObject
 
         var json = File.ReadAllText(ConfigPath);
         var config = JsonSerializer.Deserialize<GameData>(json);
-        if (config?.Npcs is null) return;
+        if (config?.Npcs is null || config.Models is null)
+            return;
 
         Npcs.Clear();
+        AvailableModels.Clear();
+
+        // Załaduj modele do listy dostępnych modeli
+        foreach (var model in config.Models)
+        {
+            AvailableModels.Add(model.Name);
+        }
 
         foreach (var npc in config.Npcs)
         {
+            // Znajdź nazwę modelu na podstawie ID
+            var modelName = config.Models.FirstOrDefault(m => m.Id == npc.ModelId)?.Name;
+
             Npcs.Add(new NpcModel(AvailableModels, RemoveNpcCommand)
             {
                 Name = npc.Name,
-                SelectedModel = npc.ModelName
+                SelectedModel = modelName
             });
         }
     }
@@ -94,11 +105,30 @@ public class NpcConfigPageViewModel : ReactiveObject
             config = new GameData();
         }
 
-        config.Npcs = Npcs.Select(n => new NpcConfig
+        // Wygeneruj unikalną listę modeli
+        var usedModels = Npcs
+            .Select(n => n.SelectedModel)
+            .Where(m => !string.IsNullOrWhiteSpace(m))
+            .Distinct()
+            .Select((modelName, index) => new ModelData
+            {
+                Id = index,
+                Name = modelName!,
+                Path = Path.GetFullPath(Path.Combine("Models", modelName!))
+            })
+            .ToList();
+
+        config.Models = usedModels;
+
+        // NPC przypisani do ID modeli
+        config.Npcs = Npcs.Select(npc =>
         {
-            Name = n.Name,
-            ModelName = n.SelectedModel ?? "",
-            ModelPath = Path.GetFullPath(Path.Combine(ModelsFolder, n.SelectedModel ?? ""))
+            var modelId = usedModels.Find(m => m.Name == npc.SelectedModel)?.Id ?? -1;
+            return new NpcConfig
+            {
+                Name = npc.Name,
+                ModelId = modelId
+            };
         }).ToList();
 
         var options = new JsonSerializerOptions

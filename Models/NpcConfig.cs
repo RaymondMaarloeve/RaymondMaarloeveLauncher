@@ -3,6 +3,5 @@
 public class NpcConfig
 {
     public string Name { get; set; } = "";
-    public string ModelName { get; set; } = "";
-    public string ModelPath { get; set; } = "";
+    public int ModelId { get; set; }
 }
