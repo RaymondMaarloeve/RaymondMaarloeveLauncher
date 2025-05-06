@@ -10,7 +10,7 @@ using ReactiveUI;
 
 namespace RaymondMaarloeveLauncher.ViewModels;
 
-public class NpcConfigPageViewModel : ReactiveObject
+public class NpcConfigPageViewModel : ReactiveObject, IDisposable
 {
     public ObservableCollection<NpcModel> Npcs { get; } = new();
     public ObservableCollection<string> AvailableModels { get; } = new();
@@ -21,6 +21,8 @@ public class NpcConfigPageViewModel : ReactiveObject
 
     private const string ConfigPath = "game_config.json";
     private const string ModelsFolder = "Models";
+    
+    private readonly IDisposable _startupSubscription;
 
     public NpcConfigPageViewModel()
     {
@@ -41,7 +43,7 @@ public class NpcConfigPageViewModel : ReactiveObject
         SaveCommand = ReactiveCommand.Create(SaveNpcConfigToJson);
 
         // Startowe dane
-        AddNpcCommand.Execute().Subscribe();
+        _startupSubscription = AddNpcCommand.Execute().Subscribe();
         LoadNpcConfigFromJson();
     }
 
@@ -139,5 +141,10 @@ public class NpcConfigPageViewModel : ReactiveObject
 
         var result = JsonSerializer.Serialize(config, options);
         File.WriteAllText(ConfigPath, result);
+    }
+    
+    public void Dispose()
+    {
+        _startupSubscription.Dispose();
     }
 }
