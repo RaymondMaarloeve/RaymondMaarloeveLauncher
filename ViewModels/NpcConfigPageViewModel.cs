@@ -24,7 +24,7 @@ public class NpcConfigPageViewModel : ReactiveObject
 
     public NpcConfigPageViewModel()
     {
-        // Inicjalizacja
+        // Initialization
         LoadAvailableModels();
 
         RemoveNpcCommand = ReactiveCommand.Create<NpcModel>(npc => Npcs.Remove(npc));
