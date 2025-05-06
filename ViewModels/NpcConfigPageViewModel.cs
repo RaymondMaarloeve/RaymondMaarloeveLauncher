@@ -13,22 +13,22 @@ namespace RaymondMaarloeveLauncher.ViewModels;
 public class NpcConfigPageViewModel : ReactiveObject
 {
     public ObservableCollection<NpcModel> Npcs { get; } = new();
-    public ObservableCollection<string> AvailableModels { get; } = new()
-    {
-        "alpha.gguf", "beta.gguf", "gamma.gguf"
-    };
+    public ObservableCollection<string> AvailableModels { get; } = new();
 
     public ReactiveCommand<NpcModel, Unit> RemoveNpcCommand { get; }
     public ReactiveCommand<Unit, Unit> AddNpcCommand { get; }
     public ReactiveCommand<Unit, Unit> SaveCommand { get; }
 
-    
     private const string ConfigPath = "game_config.json";
-
+    private const string ModelsFolder = "Models";
 
     public NpcConfigPageViewModel()
     {
+        // Inicjalizacja
+        LoadAvailableModels();
+
         RemoveNpcCommand = ReactiveCommand.Create<NpcModel>(npc => Npcs.Remove(npc));
+
         AddNpcCommand = ReactiveCommand.Create(() =>
         {
             var npc = new NpcModel(AvailableModels, RemoveNpcCommand)
@@ -37,15 +37,28 @@ public class NpcConfigPageViewModel : ReactiveObject
             };
             Npcs.Add(npc);
         });
-        
+
         SaveCommand = ReactiveCommand.Create(SaveNpcConfigToJson);
 
-
-        // Dodaj pierwszy NPC
+        // Startowe dane
         AddNpcCommand.Execute().Subscribe();
         LoadNpcConfigFromJson();
     }
-    
+
+    private void LoadAvailableModels()
+    {
+        AvailableModels.Clear();
+
+        if (!Directory.Exists(ModelsFolder))
+            Directory.CreateDirectory(ModelsFolder);
+
+        var modelPaths = Directory.GetFiles(ModelsFolder, "*.gguf");
+        foreach (var path in modelPaths)
+        {
+            AvailableModels.Add(Path.GetFileName(path));
+        }
+    }
+
     public void LoadNpcConfigFromJson()
     {
         if (!File.Exists(ConfigPath))
@@ -66,7 +79,7 @@ public class NpcConfigPageViewModel : ReactiveObject
             });
         }
     }
-    
+
     public void SaveNpcConfigToJson()
     {
         GameData config;
@@ -85,7 +98,7 @@ public class NpcConfigPageViewModel : ReactiveObject
         {
             Name = n.Name,
             ModelName = n.SelectedModel ?? "",
-            ModelPath = Path.Combine("Models", n.SelectedModel ?? "")
+            ModelPath = Path.GetFullPath(Path.Combine(ModelsFolder, n.SelectedModel ?? ""))
         }).ToList();
 
         var options = new JsonSerializerOptions
@@ -97,7 +110,4 @@ public class NpcConfigPageViewModel : ReactiveObject
         var result = JsonSerializer.Serialize(config, options);
         File.WriteAllText(ConfigPath, result);
     }
-
-
 }
-
