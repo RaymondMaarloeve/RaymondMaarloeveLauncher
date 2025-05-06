@@ -85,7 +85,7 @@ public class NpcConfigPageViewModel : ReactiveObject
 
             Npcs.Add(new NpcModel(AvailableModels, RemoveNpcCommand)
             {
-                Name = npc.Name,
+                Name = $"NPC{npc.Id + 1}",
                 SelectedModel = modelName
             });
         }
@@ -121,12 +121,12 @@ public class NpcConfigPageViewModel : ReactiveObject
         config.Models = usedModels;
 
         // NPC przypisani do ID modeli
-        config.Npcs = Npcs.Select(npc =>
+        config.Npcs = Npcs.Select((npc, index) =>
         {
-            var modelId = usedModels.Find(m => m.Name == npc.SelectedModel)?.Id ?? -1;
+            var modelId = usedModels.FirstOrDefault(m => m.Name == npc.SelectedModel)?.Id ?? -1;
             return new NpcConfig
             {
-                Name = npc.Name,
+                Id = index,
                 ModelId = modelId
             };
         }).ToList();
