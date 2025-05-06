@@ -153,6 +153,7 @@ public class HuggingFacePageViewModel : ReactiveObject
 
             ProgressText = "✅ Done";
             DownloadStatus = $"✅ Downloaded {modelName} to:\n{Path.GetFullPath(targetPath)}";
+            _ = LoadLocalModelsAsync();
         }
         catch
         {

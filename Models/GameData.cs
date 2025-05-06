@@ -9,4 +9,7 @@ public class GameData
     public bool FullScreen { get; set; } = false;
     public int GameWindowWidth { get; set; } = 1920;
     public int GameWindowHeight { get; set; } = 1080;
+    
+    public List<ModelData>? Models { get; set; }
+    public List<NpcConfig>? Npcs { get; set; }
 }

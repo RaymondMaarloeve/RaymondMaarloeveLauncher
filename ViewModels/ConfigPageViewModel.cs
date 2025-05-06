@@ -3,6 +3,7 @@ using ReactiveUI;
 using System.IO;
 using System.Text.Json;
 using System.Reactive;
+using System.Text.Json.Serialization;
 using RaymondMaarloeveLauncher.Models;
 
 namespace RaymondMaarloeveLauncher.ViewModels;
@@ -69,16 +70,30 @@ public class ConfigPageViewModel : ReactiveObject
         int.TryParse(parts[0], out var width);
         int.TryParse(parts[1], out var height);
 
-        var config = new GameData
-        {
-            Revision = 1,
-            LlmServerApi = LlmServerApi,
-            FullScreen = FullScreen,
-            GameWindowWidth = width,
-            GameWindowHeight = height
-        };
+        GameData config;
 
-        var json = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText(ConfigPath, json);
+        if (File.Exists(ConfigPath))
+        {
+            var json = File.ReadAllText(ConfigPath);
+            config = JsonSerializer.Deserialize<GameData>(json) ?? new GameData();
+        }
+        else
+        {
+            config = new GameData();
+        }
+
+        config.Revision = 1;
+        config.LlmServerApi = LlmServerApi;
+        config.FullScreen = FullScreen;
+        config.GameWindowWidth = width;
+        config.GameWindowHeight = height;
+
+        var result = JsonSerializer.Serialize(config, new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        });
+
+        File.WriteAllText(ConfigPath, result);
     }
 }

@@ -1,0 +1,20 @@
+﻿<UserControl
+    x:Class="RaymondMaarloeveLauncher.Views.NpcEntryView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:RaymondMaarloeveLauncher.ViewModels"
+    xmlns:models="clr-namespace:RaymondMaarloeveLauncher.Models"
+    x:DataType="models:NpcModel">
+
+    <DockPanel Margin="0,0,0,5">
+        <Button Content="🗑"
+                DockPanel.Dock="Right"
+                Command="{Binding RemoveCommand}"
+                CommandParameter="{Binding}" />
+    
+        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+        <ComboBox Width="200"
+                  ItemsSource="{Binding AvailableModels}"
+                  SelectedItem="{Binding SelectedModel}" />
+    </DockPanel>
+</UserControl>
