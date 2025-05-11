@@ -137,7 +137,9 @@ public class MainWindowViewModel : ViewModelBase
     private void LaunchGame()
     {
         var gameDir = "GameBuild";
-        var exePath = Path.Combine(gameDir, "StandaloneWindows64.exe");
+        var exePath = Path.Combine(gameDir, "StandaloneLinux64");
+        if (OperatingSystem.IsWindows()) 
+            exePath = Path.Combine(gameDir, "StandaloneWindows64.exe");
         var serverDir = "Server";
         var serverExePath = Path.Combine(serverDir, "LLMServer");
         if (OperatingSystem.IsWindows()) 

@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Reactive;
 using System.Threading.Tasks;
 using System.IO.Compression;
+using System.Linq;
 using Avalonia.Controls.ApplicationLifetimes;
 using MainWindowViewModel = RaymondMaarloeveLauncher.ViewModels.MainWindowViewModel;
 
@@ -132,6 +133,10 @@ public class ReleasePageViewModel : ViewModelBase
             }
 
             var asset = SelectedRelease.Assets[0];
+            if (OperatingSystem.IsWindows())
+                asset = SelectedRelease.Assets.FirstOrDefault(a => a.Name == "Build-StandaloneWindows64.zip") ?? SelectedRelease.Assets[0];
+            else if (OperatingSystem.IsLinux())
+                asset = SelectedRelease.Assets.FirstOrDefault(a => a.Name == "Build-StandaloneLinux64.zip") ?? SelectedRelease.Assets[0];
             var url = asset.BrowserDownloadUrl;
 
             DownloadStatus = $"🔄 Downloading file: {asset.Name}...";
