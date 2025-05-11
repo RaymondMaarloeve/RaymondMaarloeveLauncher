@@ -44,6 +44,7 @@
                            Margin = "10 10 10 -5"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Bottom"
+                           TextWrapping="Wrap"
                            Foreground="{DynamicResource AccentBrush} "
                 />
                 <Button 

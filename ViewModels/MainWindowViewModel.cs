@@ -133,8 +133,13 @@ public class MainWindowViewModel : ViewModelBase
     
     private void LaunchGame()
     {
-        var gameDir = Path.Combine(AppContext.BaseDirectory, "GameBuild");
+        var realAppFolder = Path.GetDirectoryName(
+            System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileName
+        );
+        var gameDir = "GameBuild";
         var exePath = Path.Combine(gameDir, "StandaloneWindows64.exe");
+        var serverDir = "Server";
+        var serverExePath = Path.Combine(serverDir, "LLMServer.exe");
 
         if (!Directory.Exists(gameDir))
         {
@@ -149,11 +154,27 @@ public class MainWindowViewModel : ViewModelBase
             return;
         }
 
+        if (!Directory.Exists(serverDir))
+        {
+            LaunchStatus = "❌ Server directory doesn't exist.";
+        }
+
+        if (!File.Exists(serverExePath))
+        {
+            LaunchStatus = "LLMServer.exe file doesn't exist.";
+        }
+
         try
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = exePath,
+                FileName = Path.Combine(realAppFolder!, serverExePath),
+                WorkingDirectory = serverDir,
+                UseShellExecute = true
+            });
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = Path.Combine(realAppFolder!, exePath),
                 WorkingDirectory = gameDir,
                 UseShellExecute = true
             });
