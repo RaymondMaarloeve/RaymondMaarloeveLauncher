@@ -48,6 +48,10 @@ public class MainWindowViewModel : ViewModelBase
         get => _latestReleaseBody;
         set => this.RaiseAndSetIfChanged(ref _latestReleaseBody, value);
     }
+    
+    private string realAppFolder = Path.GetDirectoryName(
+        System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileName
+    );
 
 
 
@@ -85,11 +89,11 @@ public class MainWindowViewModel : ViewModelBase
     
     public async Task LoadLatestReleaseDescription()
     {
-        var client = new GitHubClient(new ProductHeaderValue("GameLauncher"));
+        var client = GitHubService.GetClient();
 
         try
         {
-            var latest = await client.Repository.Release.GetLatest("Gitmanik", "RaymondMaarloeve");
+            var latest = await client.Repository.Release.GetLatest("RaymondMaarloeve", "RaymondMaarloeve");
             if (latest.Body == null)
             {
                 LatestReleaseBody = "No description.";
@@ -133,17 +137,18 @@ public class MainWindowViewModel : ViewModelBase
     
     private void LaunchGame()
     {
-        var realAppFolder = Path.GetDirectoryName(
-            System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileName
-        );
         var gameDir = "GameBuild";
-        var exePath = Path.Combine(gameDir, "StandaloneWindows64.exe");
+        var exePath = Path.Combine(realAppFolder!, gameDir, "StandaloneWindows64.exe");
         var serverDir = "Server";
-        var serverExePath = Path.Combine(serverDir, "LLMServer.exe");
+        var serverExePath = Path.Combine(realAppFolder!, serverDir, "LLMServer");
+        if (OperatingSystem.IsWindows()) 
+            serverExePath += ".exe";
+        
+        
+
 
         if (!Directory.Exists(gameDir))
         {
-            // Możesz dodać status/komunikat
             LaunchStatus = "❌ Game directory doesn't exist.";
             return;
         }
@@ -163,19 +168,42 @@ public class MainWindowViewModel : ViewModelBase
         {
             LaunchStatus = "LLMServer.exe file doesn't exist.";
         }
+        
+        if (OperatingSystem.IsLinux())
+        {
+            var filePath = serverExePath;
+            try
+            {
+                Process.Start("chmod", $"+x \"{filePath}\"")?.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                LaunchStatus = "Couldn't set executable permission" + ex.Message;
+            }
+            
+            filePath = exePath;
+            try
+            {
+                Process.Start("chmod", $"+x \"{filePath}\"")?.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                LaunchStatus = "Couldn't set executable permission" + ex.Message;
+            }
+        }
 
         try
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = Path.Combine(realAppFolder!, serverExePath),
-                WorkingDirectory = serverDir,
+                FileName = serverExePath,
+                WorkingDirectory = Path.GetDirectoryName(serverExePath),
                 UseShellExecute = true
             });
             Process.Start(new ProcessStartInfo
             {
-                FileName = Path.Combine(realAppFolder!, exePath),
-                WorkingDirectory = gameDir,
+                FileName = exePath,
+                WorkingDirectory = Path.GetDirectoryName(exePath),
                 UseShellExecute = true
             });
 
@@ -192,7 +220,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         try
         {
-            var versionPath = Path.Combine(AppContext.BaseDirectory, "GameBuild", "version.txt");
+            var versionPath = Path.Combine(realAppFolder, "GameBuild", "version.txt");
 
             if (File.Exists(versionPath))
             {
