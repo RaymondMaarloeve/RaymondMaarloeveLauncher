@@ -49,9 +49,6 @@ public class MainWindowViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _latestReleaseBody, value);
     }
     
-    private string realAppFolder = Path.GetDirectoryName(
-        System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileName
-    );
 
 
 
@@ -138,9 +135,9 @@ public class MainWindowViewModel : ViewModelBase
     private void LaunchGame()
     {
         var gameDir = "GameBuild";
-        var exePath = Path.Combine(realAppFolder!, gameDir, "StandaloneWindows64.exe");
+        var exePath = Path.Combine(gameDir, "StandaloneWindows64.exe");
         var serverDir = "Server";
-        var serverExePath = Path.Combine(realAppFolder!, serverDir, "LLMServer");
+        var serverExePath = Path.Combine(serverDir, "LLMServer");
         if (OperatingSystem.IsWindows()) 
             serverExePath += ".exe";
         
@@ -196,14 +193,14 @@ public class MainWindowViewModel : ViewModelBase
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = serverExePath,
-                WorkingDirectory = Path.GetDirectoryName(serverExePath),
+                FileName = Path.Combine(Directory.GetCurrentDirectory(), serverExePath),
+                WorkingDirectory = Path.Combine(Directory.GetCurrentDirectory(), serverDir),
                 UseShellExecute = true
             });
             Process.Start(new ProcessStartInfo
             {
-                FileName = exePath,
-                WorkingDirectory = Path.GetDirectoryName(exePath),
+                FileName = Path.Combine(Directory.GetCurrentDirectory(), exePath),
+                WorkingDirectory = Path.Combine(Directory.GetCurrentDirectory(), gameDir),
                 UseShellExecute = true
             });
 
@@ -220,7 +217,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         try
         {
-            var versionPath = Path.Combine(realAppFolder, "GameBuild", "version.txt");
+            var versionPath = Path.Combine("GameBuild", "version.txt");
 
             if (File.Exists(versionPath))
             {

@@ -138,8 +138,7 @@ public class ReleasePageViewModel : ViewModelBase
             ProgressText = "0%";
             DownloadProgress = 0;
 
-            var installPath = AppContext.BaseDirectory;
-            var filePath = Path.Combine(installPath, asset.Name);
+            var filePath = asset.Name;
 
             try
             {
@@ -183,7 +182,7 @@ public class ReleasePageViewModel : ViewModelBase
             // Extract ZIP
             if (Path.GetExtension(filePath).Equals(".zip", StringComparison.OrdinalIgnoreCase))
             {
-                var extractPath = Path.Combine(Path.GetDirectoryName(filePath)!, "GameBuild");
+                var extractPath ="GameBuild";
 
                 if (Directory.Exists(extractPath))
                     Directory.Delete(extractPath, true);
@@ -305,35 +304,4 @@ public class ReleasePageViewModel : ViewModelBase
             ServerDownloadStatus = $"❌ Unexpected error: {ex.Message}";
         }
     }
-    
-    public static class GitHubClientFactory
-    {
-        public static GitHubClient CreateClient()
-        {
-            var product = new ProductHeaderValue("RaymondMaarloeveLauncher");
-
-            string? token = null;
-
-            var tokenPath = "GITHUBTOKEN.txt";
-            if (File.Exists(tokenPath))
-            {
-                token = File.ReadAllText(tokenPath).Trim();
-            }
-
-            if (!string.IsNullOrWhiteSpace(token))
-            {
-                Console.WriteLine("GitHub token loaded from file.");
-                return new GitHubClient(product)
-                {
-                    Credentials = new Credentials(token)
-                };
-            }
-            else
-            {
-                Console.WriteLine("No token found - using unauthenticated mode (60 req/h limit).");
-                return new GitHubClient(product);
-            }
-        }
-    }
-
 }
