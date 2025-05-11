@@ -21,7 +21,6 @@ public static class GitHubService
         if (!File.Exists(tokenPath) )
         {
             GithubStatus = "No txt file found. Using unauthenticated mode (60 req/h limit).";
-            Console.WriteLine(GithubStatus);
             _client = new GitHubClient(product);
             return _client;
         }
@@ -31,7 +30,6 @@ public static class GitHubService
         if (string.IsNullOrWhiteSpace(token))
         {
             GithubStatus = "No token found in txt file. Using unauthenticated mode (60 req/h limit).";
-            Console.WriteLine(GithubStatus);
             _client = new GitHubClient(product);
             return _client;
         }
@@ -45,14 +43,12 @@ public static class GitHubService
         {
             var user = client.User.Current().Result;
             GithubStatus = "Authenticated as: " + user.Login;
-            Console.WriteLine(GithubStatus);
             _client = client;
             return _client;
         }
         catch
         {
             GithubStatus = "Invalid token. Falling back to unauthenticated mode.";
-            Console.WriteLine(GithubStatus);
         }
 
         _client = new GitHubClient(product);
