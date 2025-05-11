@@ -29,12 +29,24 @@
                 <Button Content="Game Config" Margin="0 5" Command="{Binding ShowConfigPageCommand}" HorizontalAlignment="Stretch" FontSize="20"/>
             </StackPanel>
             
-            <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Margin="10">
-                <TextBlock Margin="10 0 10 0" HorizontalAlignment="Stretch" FontStyle="Italic">Newest release info:</TextBlock>
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Stretch">
-                    <mdxaml:MarkdownScrollViewer Markdown="{Binding LatestReleaseBody}"  Margin="10" HorizontalAlignment="Stretch" />
+            <Grid Grid.Row="1" Margin="10" RowDefinitions="Auto,*">
+
+                <TextBlock Grid.Row="0"
+                           FontStyle="Italic"
+                           Margin = "5 0 0 0"
+                           HorizontalAlignment="Stretch"
+                           Text="Newest release info:" />
+
+                <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <mdxaml:MarkdownScrollViewer 
+                        Markdown="{Binding LatestReleaseBody}" 
+                        Margin="5 0 0 0"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch" />
                 </ScrollViewer>
-            </StackPanel>
+            </Grid>
                 
                 
             <StackPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
