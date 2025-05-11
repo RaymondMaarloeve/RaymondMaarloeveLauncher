@@ -1,5 +1,6 @@
 ﻿using System;
 using ReactiveUI;
+using Avalonia;
 using System.Reactive;
 using Avalonia.Controls;
 using RaymondMaarloeveLauncher.Views;
@@ -7,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Avalonia.Controls.ApplicationLifetimes;
 using Octokit;
 
 namespace RaymondMaarloeveLauncher.ViewModels;
@@ -84,7 +86,7 @@ public class MainWindowViewModel : ViewModelBase
         _ = LoadLatestReleaseDescription();
     }
     
-    public async Task LoadLatestReleaseDescription()
+    private async Task LoadLatestReleaseDescription()
     {
         var client = GitHubService.GetClient();
 
@@ -203,6 +205,11 @@ public class MainWindowViewModel : ViewModelBase
                 WorkingDirectory = Path.Combine(Directory.GetCurrentDirectory(), gameDir),
                 UseShellExecute = false
             });
+            
+            if (Avalonia.Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime life)
+            {
+                life.MainWindow?.Hide(); // Hide the launcher window
+            }
             
             gameProcess?.WaitForExit();
 
