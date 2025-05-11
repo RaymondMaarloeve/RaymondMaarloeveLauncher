@@ -4,35 +4,69 @@
              x:Class="RaymondMaarloeveLauncher.Views.ReleasePage"
              x:DataType="vm:ReleasePageViewModel"
              >
-    
-    <Grid RowDefinitions="Auto,Auto,Auto" Margin="20">
-        <TextBlock Grid.Row="0" Text="Available game releases:" FontWeight="Bold" FontSize="16" Margin="0 0 0 10"/>
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0 0 0 10">
-            <ListBox ItemsSource="{Binding Releases}"
-                     SelectedItem="{Binding SelectedRelease}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}" />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </ScrollViewer>
-        <StackPanel Grid.Row="2" Margin="0 0 0 10">
-            <Button Content="Download selected release"
-                    Margin="0 10 0 0"
-                    Command="{Binding DownloadSelectedReleaseCommand}" 
-                    IsEnabled="{Binding SelectedRelease, Converter={StaticResource NullToBoolConverter}}"/>
-            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,5">
-                <ProgressBar Width="200" Height="10" Minimum="0" Maximum="100"
-                             Value="{Binding DownloadProgress}"/>
-                <TextBlock Text="{Binding ProgressText}" VerticalAlignment="Center"/>
+    <Grid RowDefinitions="*,*" Margin="20">
+        <Grid Grid.Row="0" RowDefinitions="Auto,Auto,Auto" Margin="20">
+            <TextBlock Grid.Row="0" Text="Available game releases:" FontWeight="Bold" FontSize="16" Margin="0 0 0 10"/>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0 0 0 10">
+                <ListBox ItemsSource="{Binding Releases}"
+                         SelectedItem="{Binding SelectedRelease}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+            <StackPanel Grid.Row="2" Margin="0 0 0 10">
+                <Button Content="Download selected release"
+                        Margin="0 10 0 0"
+                        Command="{Binding DownloadSelectedReleaseCommand}" 
+                        IsEnabled="{Binding SelectedRelease, Converter={StaticResource NullToBoolConverter}}"/>
+                <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,5">
+                    <ProgressBar Width="200" Height="10" Minimum="0" Maximum="100"
+                                 Value="{Binding DownloadProgress}"/>
+                    <TextBlock Text="{Binding ProgressText}" VerticalAlignment="Center"/>
+                </StackPanel>
+                <TextBlock
+                    Text="{Binding DownloadStatus}"
+                    Foreground="{DynamicResource AccentBrush}"
+                    Margin="0 10 0 0" 
+                />
             </StackPanel>
-            <TextBlock
-                Text="{Binding DownloadStatus}"
-                Foreground="{DynamicResource AccentBrush}"
-                Margin="0 10 0 0" 
-            />
-        </StackPanel>
+        </Grid>
+        
+        <Grid Grid.Row="1" RowDefinitions="Auto,Auto,Auto" Margin="20">
+            <TextBlock Grid.Row="0" Text="Available LLM server releases:" FontWeight="Bold" FontSize="16" Margin="0 0 0 10"/>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0 0 0 10">
+                <ListBox ItemsSource="{Binding ServerReleases}"
+                         SelectedItem="{Binding SelectedServerRelease}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+            <StackPanel Grid.Row="2" Margin="0 0 0 10">
+                <Button Content="Download selected release"
+                        Margin="0 10 0 0"
+                        Command="{Binding DownloadSelectedServerReleaseCommand}" 
+                        IsEnabled="{Binding SelectedServerRelease, Converter={StaticResource NullToBoolConverter}}"/>
+                <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,5">
+                    <ProgressBar Width="200" Height="10" Minimum="0" Maximum="100"
+                                 Value="{Binding ServerDownloadProgress}"/>
+                    <TextBlock Text="{Binding ServerProgressText}" VerticalAlignment="Center"/>
+                </StackPanel>
+                <TextBlock
+                    Text="{Binding ServerDownloadStatus}"
+                    Foreground="{DynamicResource AccentBrush}"
+                    Margin="0 10 0 0" 
+                />
+            </StackPanel>
+        </Grid>
     </Grid>
+    
+    
+    
 
 </UserControl>

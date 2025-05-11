@@ -18,6 +18,7 @@ public class ReleasePageViewModel : ViewModelBase
 {
 
     public ObservableCollection<Release> Releases { get; } = new();
+    public ObservableCollection<Release> ServerReleases { get; } = new();
     
     
     private Release _selectedRelease;
@@ -26,12 +27,26 @@ public class ReleasePageViewModel : ViewModelBase
         get => _selectedRelease;
         set => this.RaiseAndSetIfChanged(ref _selectedRelease, value);
     }
+    
+    private Release _selectedServerRelease;
+    public Release SelectedServerRelease
+    {
+        get => _selectedServerRelease;
+        set => this.RaiseAndSetIfChanged(ref _selectedServerRelease, value);
+    }
 
     private double _downloadProgress;
     public double DownloadProgress
     {
         get => _downloadProgress;
         set => this.RaiseAndSetIfChanged(ref _downloadProgress, value);
+    }
+    
+    private double _serverDownloadProgress;
+    public double ServerDownloadProgress
+    {
+        get => _serverDownloadProgress;
+        set => this.RaiseAndSetIfChanged(ref _serverDownloadProgress, value);
     }
 
     private string _progressText = "";
@@ -40,17 +55,15 @@ public class ReleasePageViewModel : ViewModelBase
         get => _progressText;
         set => this.RaiseAndSetIfChanged(ref _progressText, value);
     }
-
-    private async void LoadReleases()
+    
+    private string _serverProgressText = "";
+    public string ServerProgressText
     {
-        var client = new GitHubClient(new ProductHeaderValue("GameLauncher"));
-
-        var releases = await client.Repository.Release.GetAll("Gitmanik", "RaymondMaarloeve");
-
-        Releases.Clear();
-        foreach (var release in releases)
-            Releases.Add(release);
+        get => _serverProgressText;
+        set => this.RaiseAndSetIfChanged(ref _serverProgressText, value);
     }
+    
+
     
     private string _downloadStatus;
     public string DownloadStatus
@@ -59,7 +72,15 @@ public class ReleasePageViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _downloadStatus, value);
     }
     
+    private string _serverDownloadStatus;
+    public string ServerDownloadStatus
+    {
+        get => _serverDownloadStatus;
+        set => this.RaiseAndSetIfChanged(ref _serverDownloadStatus, value);
+    }
+    
     public ReactiveCommand<Unit, Unit> DownloadSelectedReleaseCommand { get; }
+    public ReactiveCommand<Unit, Unit> DownloadSelectedServerReleaseCommand { get; }
 
     public ReleasePageViewModel()
     {
@@ -73,6 +94,23 @@ public class ReleasePageViewModel : ViewModelBase
         }
 
         DownloadSelectedReleaseCommand = ReactiveCommand.CreateFromTask(DownloadSelectedReleaseAsync);
+        DownloadSelectedServerReleaseCommand = ReactiveCommand.CreateFromTask(DownloadSelecterServerReleaseAsync);
+    }
+    private async void LoadReleases()
+    {
+        // var client = new GitHubClient(new ProductHeaderValue("GameLauncher"));
+        var client = GitHubService.GetClient();
+
+        var releases = await client.Repository.Release.GetAll("RaymondMaarloeve", "RaymondMaarloeve");
+
+        Releases.Clear();
+        foreach (var release in releases)
+            Releases.Add(release);
+        
+        var serverReleases = await client.Repository.Release.GetAll("RaymondMaarloeve", "LLMServer");
+        ServerReleases.Clear();
+        foreach (var release in serverReleases)
+            ServerReleases.Add(release);
     }
     
     private async Task DownloadSelectedReleaseAsync()
@@ -180,5 +218,122 @@ public class ReleasePageViewModel : ViewModelBase
         }
     }
 
+    private async Task DownloadSelecterServerReleaseAsync()
+    {
+        try
+        {
+            ServerDownloadStatus = "🔍 Checking your release choice...";
+
+            if (SelectedServerRelease == null)
+            {
+                ServerDownloadStatus = "❌ Any release wasn't selected.";
+                return;
+            }
+
+            if (SelectedServerRelease.Assets == null || SelectedServerRelease.Assets.Count == 0)
+            {
+                ServerDownloadStatus = $"⚠️ Release \"{SelectedServerRelease.Name}\" doesn't include any files.";
+                return;
+            }
+
+            
+            var asset = SelectedServerRelease.Assets[0];
+            if (OperatingSystem.IsWindows() && SelectedServerRelease.Assets.Count > 1)
+            {
+                asset = SelectedServerRelease.Assets[1];
+            }
+            var url = asset.BrowserDownloadUrl;
+
+            ServerDownloadStatus = $"🔄 Downloading file: {asset.Name}...";
+            ServerProgressText = "0%";
+            ServerDownloadProgress = 0;
+
+
+            var filePath = Path.Combine("Server", "LLMServer");
+            if (OperatingSystem.IsWindows())
+                filePath += ".exe";
+            Directory.CreateDirectory("Server");
+
+            try
+            {
+                using var httpClient = new HttpClient();
+                using var response = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+                response.EnsureSuccessStatusCode();
+
+                var totalBytes = response.Content.Headers.ContentLength ?? -1L;
+                var canReportProgress = totalBytes > 0;
+
+                await using var remoteStream = await response.Content.ReadAsStreamAsync();
+                await using var localFileStream = File.Create(filePath);
+
+                var buffer = new byte[81920];
+                long totalRead = 0;
+                int bytesRead;
+
+                while ((bytesRead = await remoteStream.ReadAsync(buffer)) > 0)
+                {
+                    await localFileStream.WriteAsync(buffer.AsMemory(0, bytesRead));
+                    totalRead += bytesRead;
+
+                    if (canReportProgress)
+                    {
+                        double percent = (double)totalRead / totalBytes * 100;
+                        ServerDownloadProgress = percent;
+                        ServerProgressText = $"{percent:F1}%";
+                    }
+                }
+
+                ServerProgressText = "✅ Done";
+            }
+            catch (Exception ex)
+            {
+                ServerProgressText = "";
+                ServerDownloadProgress = 0;
+                ServerDownloadStatus = $"❌ Download error: {ex.Message}";
+                return;
+            }
+
+
+            
+            ServerDownloadStatus = $"✅ Downloaded to: {filePath}";
+            
+        }
+        catch (Exception ex)
+        {
+            ServerDownloadProgress = 0;
+            ServerProgressText = "";
+            ServerDownloadStatus = $"❌ Unexpected error: {ex.Message}";
+        }
+    }
+    
+    public static class GitHubClientFactory
+    {
+        public static GitHubClient CreateClient()
+        {
+            var product = new ProductHeaderValue("RaymondMaarloeveLauncher");
+
+            string? token = null;
+
+            var tokenPath = "GITHUBTOKEN.txt";
+            if (File.Exists(tokenPath))
+            {
+                token = File.ReadAllText(tokenPath).Trim();
+            }
+
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                Console.WriteLine("GitHub token loaded from file.");
+                return new GitHubClient(product)
+                {
+                    Credentials = new Credentials(token)
+                };
+            }
+            else
+            {
+                Console.WriteLine("No token found - using unauthenticated mode (60 req/h limit).");
+                return new GitHubClient(product);
+            }
+        }
+    }
 
 }
