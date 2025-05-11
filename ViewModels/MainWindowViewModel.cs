@@ -191,20 +191,33 @@ public class MainWindowViewModel : ViewModelBase
 
         try
         {
-            Process.Start(new ProcessStartInfo
+            var serverProcess = Process.Start(new ProcessStartInfo
             {
                 FileName = Path.Combine(Directory.GetCurrentDirectory(), serverExePath),
                 WorkingDirectory = Path.Combine(Directory.GetCurrentDirectory(), serverDir),
-                UseShellExecute = true
+                UseShellExecute = false
             });
-            Process.Start(new ProcessStartInfo
+            var gameProcess = Process.Start(new ProcessStartInfo
             {
                 FileName = Path.Combine(Directory.GetCurrentDirectory(), exePath),
                 WorkingDirectory = Path.Combine(Directory.GetCurrentDirectory(), gameDir),
-                UseShellExecute = true
+                UseShellExecute = false
             });
+            
+            gameProcess?.WaitForExit();
 
-            // Zamknij launcher
+            try
+            {
+                if (serverProcess != null && !serverProcess.HasExited)
+                {
+                    serverProcess.Kill(true);
+                    serverProcess.WaitForExit();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to stop server process: {ex.Message}");
+            }
             Environment.Exit(0);
         }
         catch (Exception ex)
