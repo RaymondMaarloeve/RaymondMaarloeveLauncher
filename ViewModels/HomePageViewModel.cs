@@ -45,7 +45,6 @@ public class HomePageViewModel : ReactiveObject
 
     private void CheckGithubStatusAsync()
     {
-        _  = GitHubService.GetClient();
         GithubStatus = GitHubService.GithubStatus;
     }
 }
