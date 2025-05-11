@@ -153,6 +153,13 @@ public class MainWindowViewModel : ViewModelBase
             LaunchStatus = "❌ Game directory doesn't exist.";
             return;
         }
+        
+        const string configPath = "game_config.json";
+        var targetPath = Path.Combine(gameDir, configPath);
+        if (File.Exists(configPath))
+        {
+            File.Copy(configPath, targetPath, overwrite: true);
+        }
 
         if (!File.Exists(exePath))
         {
