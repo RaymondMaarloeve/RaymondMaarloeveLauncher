@@ -7,6 +7,7 @@ namespace RaymondMaarloeveLauncher.ViewModels;
 public static class GitHubService
 {
     private static GitHubClient? _client;
+    public static string GithubStatus { get; private set; } = "";
 
     public static GitHubClient GetClient()
     {
@@ -19,7 +20,8 @@ public static class GitHubService
 
         if (!File.Exists(tokenPath) )
         {
-            Console.WriteLine("No txt file found. Using unauthenticated mode (60 req/h limit).");
+            GithubStatus = "No txt file found. Using unauthenticated mode (60 req/h limit).";
+            Console.WriteLine(GithubStatus);
             _client = new GitHubClient(product);
             return _client;
         }
@@ -28,7 +30,8 @@ public static class GitHubService
 
         if (string.IsNullOrWhiteSpace(token))
         {
-            Console.WriteLine("No token found in txt file. Using unauthenticated mode (60 req/h limit).");
+            GithubStatus = "No token found in txt file. Using unauthenticated mode (60 req/h limit).";
+            Console.WriteLine(GithubStatus);
             _client = new GitHubClient(product);
             return _client;
         }
@@ -41,13 +44,15 @@ public static class GitHubService
         try
         {
             var user = client.User.Current().Result;
-            Console.WriteLine($"Authenticated as: {user.Login}");
+            GithubStatus = "Authenticated as: " + user.Login;
+            Console.WriteLine(GithubStatus);
             _client = client;
             return _client;
         }
         catch
         {
-            Console.WriteLine("Invalid token. Falling back to unauthenticated mode.");
+            GithubStatus = "Invalid token. Falling back to unauthenticated mode.";
+            Console.WriteLine(GithubStatus);
         }
 
         _client = new GitHubClient(product);
