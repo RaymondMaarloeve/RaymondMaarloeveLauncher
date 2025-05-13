@@ -1,6 +1,5 @@
 ﻿using System;
 using ReactiveUI;
-using Avalonia;
 using System.Reactive;
 using Avalonia.Controls;
 using RaymondMaarloeveLauncher.Views;
@@ -9,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls.ApplicationLifetimes;
-using Octokit;
 
 namespace RaymondMaarloeveLauncher.ViewModels;
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using Avalonia;
 using Octokit;
 using ReactiveUI;
 using System.Collections.ObjectModel;
@@ -10,7 +9,6 @@ using System.Threading.Tasks;
 using System.IO.Compression;
 using System.Linq;
 using Avalonia.Controls.ApplicationLifetimes;
-using MainWindowViewModel = RaymondMaarloeveLauncher.ViewModels.MainWindowViewModel;
 
 
 namespace RaymondMaarloeveLauncher.ViewModels;
