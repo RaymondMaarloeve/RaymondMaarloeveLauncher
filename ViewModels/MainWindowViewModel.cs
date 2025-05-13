@@ -138,6 +138,9 @@ public class MainWindowViewModel : ViewModelBase
         var exePath = Path.Combine(gameDir, "StandaloneLinux64");
         if (OperatingSystem.IsWindows()) 
             exePath = Path.Combine(gameDir, "StandaloneWindows64.exe");
+        var dataPath = Path.Combine(gameDir, "StandaloneLinux64_Data");
+        if (OperatingSystem.IsWindows()) 
+            dataPath = Path.Combine(gameDir, "StandaloneWindows64_Data");
         var serverDir = "Server";
         var serverExePath = Path.Combine(serverDir, "LLMServer");
         if (OperatingSystem.IsWindows()) 
@@ -153,7 +156,8 @@ public class MainWindowViewModel : ViewModelBase
         }
         
         const string configPath = "game_config.json";
-        var targetPath = Path.Combine(gameDir, configPath);
+        var targetPath = Path.Combine(dataPath, configPath);
+        
         if (File.Exists(configPath))
         {
             File.Copy(configPath, targetPath, overwrite: true);
