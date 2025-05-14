@@ -1,5 +1,6 @@
 ﻿using ReactiveUI;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Reactive;
 using System.Text.Json.Serialization;
@@ -32,8 +33,37 @@ public class ConfigPageViewModel : ReactiveObject
         set
         {
             this.RaiseAndSetIfChanged(ref _localhost, value);
-            LlmServerApi = value ? "http://127.0.0.1:5000/" : "";
+            if (value)
+            {
+                LlmServerApi = "http://127.0.0.1:5000/";
+                LoadLocalModels();
+            }
         }
+    }
+
+    private void LoadLocalModels()
+    {
+        Directory.CreateDirectory("Models");
+        var files = Directory.GetFiles("Models", "*.gguf");
+        
+        var json = File.Exists(ConfigPath) ? File.ReadAllText(ConfigPath) : "{}";
+        var config = JsonSerializer.Deserialize<GameData>(json) ?? new GameData();
+        
+        config.Models = files.Select((path, index) => new ModelData 
+        {
+            Id = index,
+            Name = Path.GetFileName(path),
+            Path = Path.Combine(Directory.GetCurrentDirectory(), path)
+            // Path = path
+        }).ToList();
+
+        var result = JsonSerializer.Serialize(config, new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        });
+
+        File.WriteAllText(ConfigPath, result);
     }
 
     private bool _fullScreen = false;
@@ -77,6 +107,11 @@ public class ConfigPageViewModel : ReactiveObject
         if (config is null) return;
 
         LlmServerApi = config.LlmServerApi;
+        Localhost = config.Localhost;
+        if (!Localhost)
+        {
+            LlmModelPath = config.Models?.FirstOrDefault()?.Path ?? string.Empty;
+        }
         FullScreen = config.FullScreen;
         Resolution = $"{config.GameWindowWidth}x{config.GameWindowHeight}";
     }
