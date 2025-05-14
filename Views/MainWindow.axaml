@@ -9,6 +9,7 @@
         xmlns:md="clr-namespace:Markdown.Avalonia;assembly=Markdown.Avalonia.Tight"
         xmlns:mdxaml="https://github.com/whistyun/Markdown.Avalonia.Tight"
         Width="1300" Height="800"
+        Icon="/Assets/Game-icon.ico"
         Title="Game Launcher">
     
     <Grid ColumnDefinitions="1*,2*" RowDefinitions="*">
