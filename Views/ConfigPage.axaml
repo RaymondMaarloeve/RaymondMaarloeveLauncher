@@ -8,7 +8,10 @@
         <TextBlock Text="Game Configuration" FontSize="16" FontWeight="Bold"/>
 
         <TextBlock Text="LLM Server API:"/>
-        <TextBox Text="{Binding LlmServerApi}" Width="300" HorizontalAlignment="Left"/>
+        <TextBox Text="{Binding LlmServerApi}" Width="300" HorizontalAlignment="Left" IsEnabled="{Binding !Localhost}"/> 
+        <TextBlock Text="LLM model path on server:" IsVisible="{Binding !Localhost}" />
+        <TextBox Text="{Binding LlmModelPath}" Width="300" HorizontalAlignment="Left" IsVisible="{Binding !Localhost}"/>
+        <CheckBox Content="Local" IsChecked="{Binding Localhost}" />
 
         <TextBlock Text="Resolution:"/>
         <ComboBox ItemsSource="{Binding AvailableResolutions}"

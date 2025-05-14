@@ -18,6 +18,24 @@ public class ConfigPageViewModel : ReactiveObject
         set => this.RaiseAndSetIfChanged(ref _llmServerApi, value);
     }
 
+    private string _llmModelPath = "";
+    public string LlmModelPath
+    {
+        get => _llmModelPath;
+        set => this.RaiseAndSetIfChanged(ref _llmModelPath, value);
+    }
+    
+    private bool _localhost = true;
+    public bool Localhost
+    {
+        get => _localhost;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _localhost, value);
+            LlmServerApi = value ? "http://127.0.0.1:5000/" : "";
+        }
+    }
+
     private bool _fullScreen = false;
     public bool FullScreen
     {
@@ -83,9 +101,23 @@ public class ConfigPageViewModel : ReactiveObject
 
         config.Revision = 1;
         config.LlmServerApi = LlmServerApi;
+        config.Localhost = Localhost;
         config.FullScreen = FullScreen;
         config.GameWindowWidth = width;
         config.GameWindowHeight = height;
+
+        if (!Localhost)
+        {
+            config.Models =
+            [
+                new ModelData
+                {
+                    Id = 0,
+                    Name = Path.GetFileName(LlmModelPath),
+                    Path = LlmModelPath
+                }
+            ];
+        }
 
         var result = JsonSerializer.Serialize(config, new JsonSerializerOptions
         {

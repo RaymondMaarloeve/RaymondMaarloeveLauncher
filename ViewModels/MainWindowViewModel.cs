@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ReactiveUI;
 using System.Reactive;
 using Avalonia.Controls;
@@ -6,8 +7,11 @@ using RaymondMaarloeveLauncher.Views;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Avalonia.Controls.ApplicationLifetimes;
+using RaymondMaarloeveLauncher.Models;
+using Splat.ModeDetection;
 
 namespace RaymondMaarloeveLauncher.ViewModels;
 
@@ -48,6 +52,8 @@ public class MainWindowViewModel : ViewModelBase
         get => _latestReleaseBody;
         set => this.RaiseAndSetIfChanged(ref _latestReleaseBody, value);
     }
+
+    private bool _localhost = true;
     
 
 
@@ -161,6 +167,7 @@ public class MainWindowViewModel : ViewModelBase
         if (File.Exists(configPath))
         {
             File.Copy(configPath, targetPath, overwrite: true);
+            _localhost = ReadLocalhostFromConfig(configPath);
         }
 
         if (!File.Exists(exePath))
@@ -204,18 +211,27 @@ public class MainWindowViewModel : ViewModelBase
 
         try
         {
-            var serverProcess = Process.Start(new ProcessStartInfo
+            Process? serverProcess = null;
+            if (_localhost)
             {
-                FileName = Path.Combine(Directory.GetCurrentDirectory(), serverExePath),
-                WorkingDirectory = Path.Combine(Directory.GetCurrentDirectory(), serverDir),
-                UseShellExecute = false
-            });
+                serverProcess = Process.Start(new ProcessStartInfo
+                {
+                    FileName = Path.Combine(Directory.GetCurrentDirectory(), serverExePath),
+                    WorkingDirectory = Path.Combine(Directory.GetCurrentDirectory(), serverDir),
+                    UseShellExecute = false
+                });
+            }
             var gameProcess = Process.Start(new ProcessStartInfo
             {
                 FileName = Path.Combine(Directory.GetCurrentDirectory(), exePath),
                 WorkingDirectory = Path.Combine(Directory.GetCurrentDirectory(), gameDir),
                 UseShellExecute = false
             });
+
+            if (!_localhost)
+            {
+                Environment.Exit(0);
+            }
             
             if (Avalonia.Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime life)
             {
@@ -242,6 +258,23 @@ public class MainWindowViewModel : ViewModelBase
         {
             LaunchStatus = $"❌ Game launching error: {ex.Message}";
         }
+    }
+
+    private bool ReadLocalhostFromConfig(string configPath)
+    {
+        try
+        {
+            string jsonContent = File.ReadAllText(configPath);
+            var config = JsonSerializer.Deserialize<GameData>(jsonContent);
+            bool localhost = config?.Localhost ?? false;
+            return localhost;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to read config file: {ex.Message}");
+            return false;
+        }
+        return false;
     }
     
     public void LoadCurrentVersionFromFile()
