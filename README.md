@@ -2,9 +2,17 @@
 
 # Raymond Maarloeve Launcher
 
-> ⚠ This is the official **launcher** for the [RaymondMaarloeve game project](https://github.com/Gitmanik/RaymondMaarloeve).
+> ⚠ This is the official **launcher** for the [RaymondMaarloeve game project](https://github.com/RaymondMaarloeve/RaymondMaarloeve).
+
+![.NET](https://img.shields.io/badge/.NET-9.0-blueviolet)
+![UI](https://img.shields.io/badge/GUI-AvaloniaUI-green)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-informational)
+![Last Commit](https://img.shields.io/github/last-commit/RaymondMaarloeve/RaymondMaarloeveLauncher)
+
 
 A modern, cross-platform launcher for the **Raymond Maarloeve** game project, built with [Avalonia UI](https://avaloniaui.net/).
+
+It provides a user-friendly interface to download, manage and launch game builds directly from GitHub Releases.
 
 <p align="center">
   <img src="https://github.com/cyptrix12/RaymondMaarloeveLauncher/blob/master/Preview.png" alt="Launcher Preview" width="600"/>
@@ -13,7 +21,7 @@ A modern, cross-platform launcher for the **Raymond Maarloeve** game project, bu
 ## ✨ Features
 
 - 🔍 Fetches list of GitHub releases dynamically
-- 🧠 Downloads and extracts selected game builds (ZIP)
+- 🧠 Downloads and extracts selected game builds (ZIP), LLM server and LLM models
 - 💬 Displays detailed changelog from latest release (Markdown-rendered)
 - 🛠 Automatically tracks and displays the current installed game version
 - 🚀 Launches the game directly from the launcher
@@ -29,11 +37,14 @@ A modern, cross-platform launcher for the **Raymond Maarloeve** game project, bu
 
 ## 🚀 Usage
 
+[⬇️ Download latest build](https://github.com/RaymondMaarloeve/RaymondMaarloeveLauncher/releases/latest)
+
 1. Launch the app (`RaymondMaarloeveLauncher.exe`)
-2. Choose and download a release
-3. View changelog and installed version
-4. Click **Launch game** – the `.exe` from the build will be run
-5. Done!
+2. Choose and download releases (game, server)
+3. Choose and download LLM models
+4. Config NPC's and game settings
+6. Click **Launch game** – the `.exe` from the build will be run
+7. Done!
 
 ## 🛠 Build instructions
 
