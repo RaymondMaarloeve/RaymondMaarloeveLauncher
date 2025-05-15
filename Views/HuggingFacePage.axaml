@@ -37,9 +37,12 @@
                          SelectedItem="{Binding SelectedLocalModel}" />
             </ScrollViewer>
             <StackPanel Grid.Row="2" Margin="0,0,0,10">
-                <Button Content="🗑 Delete selected model"
-                        Command="{Binding DeleteModelCommand}"
-                        IsEnabled="{Binding SelectedLocalModel, Converter={StaticResource NullToBoolConverter}}"/>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Button Content="Save models" Command="{Binding SaveToJsonCommand}" />
+                    <Button Content="🗑 Delete selected model"
+                            Command="{Binding DeleteModelCommand}"
+                            IsEnabled="{Binding SelectedLocalModel, Converter={StaticResource NullToBoolConverter}}"/>
+                </StackPanel>
                 <TextBlock Text="{Binding LocalModelsStatus}" Foreground="{DynamicResource AccentBrush}"/>
             </StackPanel>
         </Grid>

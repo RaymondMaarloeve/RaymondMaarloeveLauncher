@@ -8,6 +8,8 @@ using System.Reactive;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Text.Json.Serialization;
+using RaymondMaarloeveLauncher.Models;
 
 namespace RaymondMaarloeveLauncher.ViewModels;
 
@@ -68,6 +70,8 @@ public class HuggingFacePageViewModel : ReactiveObject
     public ReactiveCommand<Unit, Unit> LoadLocalModelsCommand { get; }
     
     public ReactiveCommand<Unit, Unit> DeleteModelCommand { get; }
+    public ReactiveCommand<Unit, Unit> SaveToJsonCommand { get; }
+    private const string ConfigPath = "game_config.json";
 
     public HuggingFacePageViewModel()
     {
@@ -76,10 +80,36 @@ public class HuggingFacePageViewModel : ReactiveObject
         
         LoadLocalModelsCommand = ReactiveCommand.CreateFromTask(LoadLocalModelsAsync);
         DeleteModelCommand = ReactiveCommand.CreateFromTask(DeleteSelectedLocalModelAsync);
+        SaveToJsonCommand = ReactiveCommand.Create(SaveToJson);
         
 
         _ = LoadLocalModelsAsync();
         _ = LoadAvailableModelsAsync();
+    }
+
+    private void SaveToJson()
+    {
+        Directory.CreateDirectory("Models");
+        var files = Directory.GetFiles("Models", "*.gguf");
+        
+        var json = File.Exists(ConfigPath) ? File.ReadAllText(ConfigPath) : "{}";
+        var config = JsonSerializer.Deserialize<GameData>(json) ?? new GameData();
+        
+        config.Models = files.Select((path, index) => new ModelData 
+        {
+            Id = index,
+            Name = Path.GetFileName(path),
+            Path = Path.Combine(Directory.GetCurrentDirectory(), path)
+            // Path = path
+        }).ToList();
+
+        var result = JsonSerializer.Serialize(config, new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        });
+
+        File.WriteAllText(ConfigPath, result);
     }
 
     private async Task LoadAvailableModelsAsync()
