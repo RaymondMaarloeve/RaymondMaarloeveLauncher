@@ -1,6 +1,8 @@
-﻿using ReactiveUI;
+﻿using System;
+using ReactiveUI;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text.Json;
 using System.Reactive;
 using System.Text.Json.Serialization;
@@ -90,13 +92,60 @@ public class ConfigPageViewModel : ReactiveObject
     };
 
     public ReactiveCommand<Unit, Unit> SaveCommand { get; }
+    public ReactiveCommand<Unit, Unit> GetModelsCommand { get; }
 
     public ConfigPageViewModel()
     {
         SaveCommand = ReactiveCommand.Create(SaveConfig);
+        GetModelsCommand = ReactiveCommand.Create(GetModels);
         LoadConfig();
     }
 
+    private async void GetModels()
+    {
+        using var client = new HttpClient();
+        try
+        {
+            var content = new StringContent(
+                JsonSerializer.Serialize(new { directory = LlmModelPath }), 
+                System.Text.Encoding.UTF8, 
+                "application/json");
+            
+            var response = await client.PostAsync($"{LlmServerApi}list-files", content);
+            var responseStr = await response.Content.ReadAsStringAsync();
+            
+            // Deserializacja do odpowiedniego typu
+            var serverResponse = JsonSerializer.Deserialize<Root>(responseStr);
+            
+            if (serverResponse?.success == true && serverResponse.files != null)
+            {
+                var existingConfig = File.Exists(ConfigPath) 
+                    ? JsonSerializer.Deserialize<GameData>(File.ReadAllText(ConfigPath)) 
+                    : new GameData();
+            
+            // Konwersja z FileInfo na ModelData
+                existingConfig.Models = serverResponse.files.Select((file, index) => new ModelData
+                {
+                    Id = index,
+                    Name = file.name,
+                    Path = file.path
+                }).ToList();
+            
+                var result = JsonSerializer.Serialize(existingConfig, new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                });
+            
+                File.WriteAllText(ConfigPath, result);
+            }
+        }
+        catch (Exception)
+        {
+            // Failed to get models from server
+            LlmModelPath = string.Empty;
+        }
+    }
     private void LoadConfig()
     {
         if (!File.Exists(ConfigPath))
@@ -140,19 +189,6 @@ public class ConfigPageViewModel : ReactiveObject
         config.FullScreen = FullScreen;
         config.GameWindowWidth = width;
         config.GameWindowHeight = height;
-
-        if (!Localhost)
-        {
-            config.Models =
-            [
-                new ModelData
-                {
-                    Id = 0,
-                    Name = Path.GetFileName(LlmModelPath),
-                    Path = LlmModelPath
-                }
-            ];
-        }
 
         var result = JsonSerializer.Serialize(config, new JsonSerializerOptions
         {

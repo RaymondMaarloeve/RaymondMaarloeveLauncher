@@ -8,9 +8,12 @@
         <TextBlock Text="Game Configuration" FontSize="16" FontWeight="Bold"/>
 
         <TextBlock Text="LLM Server API:"/>
-        <TextBox Text="{Binding LlmServerApi}" Width="300" HorizontalAlignment="Left" IsEnabled="{Binding !Localhost}"/> 
-        <TextBlock Text="LLM model path on server:" IsVisible="{Binding !Localhost}" />
+        <TextBox Text="{Binding LlmServerApi}" Width="300" HorizontalAlignment="Left" IsEnabled="{Binding !Localhost}"/>
+        <TextBlock Text="LLM dir path on server:" IsVisible="{Binding !Localhost}" />
+        <StackPanel Orientation="Horizontal" Spacing="10">
         <TextBox Text="{Binding LlmModelPath}" Width="300" HorizontalAlignment="Left" IsVisible="{Binding !Localhost}"/>
+        <Button Content="Get models" Command="{Binding GetModelsCommand}" IsVisible="{Binding !Localhost}"/>
+        </StackPanel>
         <CheckBox Content="Local" IsChecked="{Binding Localhost}" />
 
         <TextBlock Text="Resolution:"/>
