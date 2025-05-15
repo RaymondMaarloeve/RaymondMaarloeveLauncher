@@ -61,7 +61,7 @@ public class NpcConfigPageViewModel : ReactiveObject, IDisposable
             config = JsonSerializer.Deserialize<GameData>(json);
         }
     
-        var modelNames = config.Models.Select(m => m.Name);
+        var modelNames = config?.Models?.Select(m => m.Name) ?? Enumerable.Empty<string>();
         
         foreach (var name in modelNames)
         {
