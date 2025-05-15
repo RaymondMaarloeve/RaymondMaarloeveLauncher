@@ -60,6 +60,8 @@ public class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel()
     {
+        CreateConfigFile();
+        
         ShowHomePageCommand = ReactiveCommand.Create(() =>
         {
             CurrentPage = new HomePage();
@@ -88,6 +90,15 @@ public class MainWindowViewModel : ViewModelBase
         LoadCurrentVersionFromFile();
 
         _ = LoadLatestReleaseDescription();
+    }
+
+    private void CreateConfigFile()
+    {
+        const string configPath = "game_config.json";
+        if (!File.Exists(configPath))
+        {
+            File.WriteAllText(configPath, "{}");
+        }
     }
     
     private async Task LoadLatestReleaseDescription()
