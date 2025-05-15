@@ -54,10 +54,18 @@ public class NpcConfigPageViewModel : ReactiveObject, IDisposable
         if (!Directory.Exists(ModelsFolder))
             Directory.CreateDirectory(ModelsFolder);
 
-        var modelPaths = Directory.GetFiles(ModelsFolder, "*.gguf");
-        foreach (var path in modelPaths)
+        GameData? config = null;
+        if (File.Exists(ConfigPath))
         {
-            AvailableModels.Add(Path.GetFileName(path));
+            var json = File.ReadAllText(ConfigPath);
+            config = JsonSerializer.Deserialize<GameData>(json);
+        }
+    
+        var modelNames = config.Models.Select(m => m.Name);
+        
+        foreach (var name in modelNames)
+        {
+            AvailableModels.Add(name);
         }
     }
 
@@ -106,26 +114,9 @@ public class NpcConfigPageViewModel : ReactiveObject, IDisposable
         {
             config = new GameData();
         }
-
-        // Wygeneruj unikalną listę modeli
-        var usedModels = Npcs
-            .Select(n => n.SelectedModel)
-            .Where(m => !string.IsNullOrWhiteSpace(m))
-            .Distinct()
-            .Select((modelName, index) => new ModelData
-            {
-                Id = index,
-                Name = modelName!,
-                Path = Path.GetFullPath(Path.Combine("Models", modelName!))
-            })
-            .ToList();
-
-        config.Models = usedModels;
-
-        // NPC przypisani do ID modeli
         config.Npcs = Npcs.Select((npc, index) =>
         {
-            var modelId = usedModels.FirstOrDefault(m => m.Name == npc.SelectedModel)?.Id ?? -1;
+            var modelId = config.Models.FirstOrDefault(m => m.Name == npc.SelectedModel)?.Id ?? -1;
             return new NpcConfig
             {
                 Id = index,
