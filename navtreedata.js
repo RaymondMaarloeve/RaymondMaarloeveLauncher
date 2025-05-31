@@ -29,16 +29,8 @@ var NAVTREE =
     [ "🧩 Technologies", "index.html#autotoc_md2", null ],
     [ "🚀 Usage", "index.html#autotoc_md3", null ],
     [ "🛠 Build instructions", "index.html#autotoc_md4", null ],
-    [ "pag_example", "pag_example.html", null ],
-    [ "Bug List", "bug.html", null ],
-    [ "Modules", "modules.html", "modules" ],
     [ "Packages", "namespaces.html", [
-      [ "Package List", "namespaces.html", "namespaces_dup" ],
-      [ "Package Members", "namespacemembers.html", [
-        [ "All", "namespacemembers.html", null ],
-        [ "Functions", "namespacemembers_func.html", null ],
-        [ "Variables", "namespacemembers_vars.html", null ]
-      ] ]
+      [ "Package List", "namespaces.html", "namespaces_dup" ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -47,34 +39,22 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ],
-        [ "Enumerations", "functions_enum.html", null ],
-        [ "Enumerator", "functions_eval.html", null ],
-        [ "Properties", "functions_prop.html", null ],
-        [ "Related Functions", "functions_rela.html", null ]
+        [ "Properties", "functions_prop.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
-        [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ],
-        [ "Variables", "globals_vars.html", null ],
-        [ "Typedefs", "globals_type.html", null ],
-        [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ],
-        [ "Macros", "globals_defs.html", null ]
+        [ "All", "globals.html", null ]
       ] ]
-    ] ],
-    [ "Examples", "examples.html", "examples" ]
+    ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
 "_app_8axaml_8cs.html",
-"class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#a4c5a432c0f4167fe56a87c2cbf7295ce",
-"namespace_raymond_maarloeve_launcher.html"
+"class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#afc274f099c2e6615b1af4994a405eb33"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

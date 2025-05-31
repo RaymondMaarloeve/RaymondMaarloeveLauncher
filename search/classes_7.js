@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['homepage_0',['HomePage',['../class_raymond_maarloeve_launcher_1_1_views_1_1_home_page.html',1,'RaymondMaarloeveLauncher::Views']]],
-  ['homepageviewmodel_1',['HomePageViewModel',['../class_raymond_maarloeve_launcher_1_1_view_models_1_1_home_page_view_model.html',1,'RaymondMaarloeveLauncher::ViewModels']]],
-  ['huggingfacepage_2',['HuggingFacePage',['../class_raymond_maarloeve_launcher_1_1_views_1_1_hugging_face_page.html',1,'RaymondMaarloeveLauncher::Views']]],
-  ['huggingfacepageviewmodel_3',['HuggingFacePageViewModel',['../class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html',1,'RaymondMaarloeveLauncher::ViewModels']]]
+  ['mainwindow_0',['MainWindow',['../class_raymond_maarloeve_launcher_1_1_views_1_1_main_window.html',1,'RaymondMaarloeveLauncher::Views']]],
+  ['mainwindowviewmodel_1',['MainWindowViewModel',['../class_raymond_maarloeve_launcher_1_1_view_models_1_1_main_window_view_model.html',1,'RaymondMaarloeveLauncher::ViewModels']]],
+  ['modeldata_2',['ModelData',['../class_raymond_maarloeve_launcher_1_1_models_1_1_model_data.html',1,'RaymondMaarloeveLauncher::Models']]]
 ];

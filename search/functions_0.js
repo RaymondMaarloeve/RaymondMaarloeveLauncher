@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['_5f_5finit_5f_5f_0',['__init__',['../classdocstring_1_1_py_class.html#a00dd800dc15e2b727e2a37c6f6c40e8b',1,'docstring.PyClass.__init__()'],['../classpyexample_1_1_py_class.html#a87e20fe7e81cb5a1c04e620c076ab8ac',1,'pyexample.PyClass.__init__()']]]
+  ['build_0',['Build',['../class_raymond_maarloeve_launcher_1_1_view_locator.html#a3c2fbd3634427c73f47179461bdb4e42',1,'RaymondMaarloeveLauncher::ViewLocator']]],
+  ['buildavaloniaapp_1',['BuildAvaloniaApp',['../class_raymond_maarloeve_launcher_1_1_program.html#a91c94f1a6a2c89c0fb5ab1451bc3c8cc',1,'RaymondMaarloeveLauncher::Program']]]
 ];

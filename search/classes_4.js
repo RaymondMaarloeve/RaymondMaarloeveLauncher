@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['e_0',['E',['../class_e.html',1,'']]],
-  ['enum_5ftest_1',['Enum_Test',['../class_enum___test.html',1,'']]],
-  ['example_5ftest_2',['Example_Test',['../class_example___test.html',1,'']]]
+  ['gamedata_0',['GameData',['../class_raymond_maarloeve_launcher_1_1_models_1_1_game_data.html',1,'RaymondMaarloeveLauncher::Models']]]
 ];
