@@ -98,24 +98,34 @@ $(document).ready(function(){initNavTree('class_raymond_maarloeve_launcher_1_1_m
   <div class="headertitle"><div class="title">RaymondMaarloeveLauncher.Models.NpcModel Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents an NPC model, including its name, selected model, available models, and remove command.  
+ <a href="class_raymond_maarloeve_launcher_1_1_models_1_1_npc_model.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a035010a3d065088fcde73f598ed919e6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_models_1_1_npc_model.html#a035010a3d065088fcde73f598ed919e6">NpcModel</a> (IEnumerable&lt; string &gt; availableModels, ReactiveCommand&lt; <a class="el" href="class_raymond_maarloeve_launcher_1_1_models_1_1_npc_model.html">NpcModel</a>, Unit &gt; removeCommand)</td></tr>
+<tr class="memdesc:a035010a3d065088fcde73f598ed919e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the NpcModel class.  <br /></td></tr>
 <tr class="separator:a035010a3d065088fcde73f598ed919e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:ad78a06a717b4b14e4c7f482e149cea10"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_models_1_1_npc_model.html#ad78a06a717b4b14e4c7f482e149cea10">Name</a> = &quot;&quot;<code> [get, set]</code></td></tr>
+<tr class="memdesc:ad78a06a717b4b14e4c7f482e149cea10"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the NPC.  <br /></td></tr>
 <tr class="separator:ad78a06a717b4b14e4c7f482e149cea10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8954919e2aeffa3956537e36e96a826"><td class="memItemLeft" align="right" valign="top">string?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_models_1_1_npc_model.html#ab8954919e2aeffa3956537e36e96a826">SelectedModel</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:ab8954919e2aeffa3956537e36e96a826"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the selected model for the NPC.  <br /></td></tr>
 <tr class="separator:ab8954919e2aeffa3956537e36e96a826"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a263de3305b17967a0a762c09c20da39c"><td class="memItemLeft" align="right" valign="top">ObservableCollection&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_models_1_1_npc_model.html#a263de3305b17967a0a762c09c20da39c">AvailableModels</a><code> [get]</code></td></tr>
+<tr class="memdesc:a263de3305b17967a0a762c09c20da39c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The collection of available model names for the NPC.  <br /></td></tr>
 <tr class="separator:a263de3305b17967a0a762c09c20da39c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4752636007ce373504100060da71b9a6"><td class="memItemLeft" align="right" valign="top">ReactiveCommand&lt; <a class="el" href="class_raymond_maarloeve_launcher_1_1_models_1_1_npc_model.html">NpcModel</a>, Unit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_models_1_1_npc_model.html#a4752636007ce373504100060da71b9a6">RemoveCommand</a><code> [get]</code></td></tr>
+<tr class="memdesc:a4752636007ce373504100060da71b9a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to remove this NPC from the collection.  <br /></td></tr>
 <tr class="separator:a4752636007ce373504100060da71b9a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents an NPC model, including its name, selected model, available models, and remove command. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a035010a3d065088fcde73f598ed919e6" name="a035010a3d065088fcde73f598ed919e6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a035010a3d065088fcde73f598ed919e6">&#9670;&#160;</a></span>NpcModel()</h2>
 
@@ -142,6 +152,15 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initializes a new instance of the NpcModel class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">availableModels</td><td>The collection of available model names.</td></tr>
+    <tr><td class="paramname">removeCommand</td><td>The command to remove this NPC.</td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Property Documentation</h2>
@@ -165,6 +184,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>The collection of available model names for the NPC. </p>
+
 </div>
 </div>
 <a id="ad78a06a717b4b14e4c7f482e149cea10" name="ad78a06a717b4b14e4c7f482e149cea10"></a>
@@ -186,6 +207,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>The name of the NPC. </p>
 
 </div>
 </div>
@@ -209,6 +232,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Command to remove this NPC from the collection. </p>
+
 </div>
 </div>
 <a id="ab8954919e2aeffa3956537e36e96a826" name="ab8954919e2aeffa3956537e36e96a826"></a>
@@ -230,6 +255,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Gets or sets the selected model for the NPC. </p>
 
 </div>
 </div>

@@ -98,24 +98,34 @@ $(document).ready(function(){initNavTree('class_raymond_maarloeve_launcher_1_1_v
   <div class="headertitle"><div class="title">RaymondMaarloeveLauncher.ViewModels.HomePageViewModel Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>ViewModel for the home page, responsible for managing GitHub token and status.  
+ <a href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_home_page_view_model.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4419ab6d324a6265b9799238b5106d87"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_home_page_view_model.html#a4419ab6d324a6265b9799238b5106d87">HomePageViewModel</a> ()</td></tr>
+<tr class="memdesc:a4419ab6d324a6265b9799238b5106d87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the HomePageViewModel class. Loads the token from file if it exists.  <br /></td></tr>
 <tr class="separator:a4419ab6d324a6265b9799238b5106d87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a6c27a0f9f977e458540743fbb9edaa64"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_home_page_view_model.html#a6c27a0f9f977e458540743fbb9edaa64">GithubToken</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a6c27a0f9f977e458540743fbb9edaa64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the GitHub token.  <br /></td></tr>
 <tr class="separator:a6c27a0f9f977e458540743fbb9edaa64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d1e629d956cd228c14eceac1f1cc5a8"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_home_page_view_model.html#a5d1e629d956cd228c14eceac1f1cc5a8">GithubStatus</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a5d1e629d956cd228c14eceac1f1cc5a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the GitHub status message.  <br /></td></tr>
 <tr class="separator:a5d1e629d956cd228c14eceac1f1cc5a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9342c20b9e8d3acf80aa7260efd13da5"><td class="memItemLeft" align="right" valign="top">ReactiveCommand&lt; Unit, Unit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_home_page_view_model.html#a9342c20b9e8d3acf80aa7260efd13da5">SubmitTokenCommand</a><code> [get]</code></td></tr>
+<tr class="memdesc:a9342c20b9e8d3acf80aa7260efd13da5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to submit and save the GitHub token to file.  <br /></td></tr>
 <tr class="separator:a9342c20b9e8d3acf80aa7260efd13da5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1433c31c8ee5acefcb72cd8983ec6f1"><td class="memItemLeft" align="right" valign="top">ReactiveCommand&lt; Unit, Unit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_home_page_view_model.html#ab1433c31c8ee5acefcb72cd8983ec6f1">CheckTokenStatusCommand</a><code> [get]</code></td></tr>
+<tr class="memdesc:ab1433c31c8ee5acefcb72cd8983ec6f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to check the current GitHub authentication status.  <br /></td></tr>
 <tr class="separator:ab1433c31c8ee5acefcb72cd8983ec6f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>ViewModel for the home page, responsible for managing GitHub token and status. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4419ab6d324a6265b9799238b5106d87" name="a4419ab6d324a6265b9799238b5106d87"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4419ab6d324a6265b9799238b5106d87">&#9670;&#160;</a></span>HomePageViewModel()</h2>
 
@@ -130,6 +140,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes a new instance of the HomePageViewModel class. Loads the token from file if it exists. </p>
 
 </div>
 </div>
@@ -154,6 +166,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Command to check the current GitHub authentication status. </p>
+
 </div>
 </div>
 <a id="a5d1e629d956cd228c14eceac1f1cc5a8" name="a5d1e629d956cd228c14eceac1f1cc5a8"></a>
@@ -175,6 +189,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Gets or sets the GitHub status message. </p>
 
 </div>
 </div>
@@ -198,6 +214,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Gets or sets the GitHub token. </p>
+
 </div>
 </div>
 <a id="a9342c20b9e8d3acf80aa7260efd13da5" name="a9342c20b9e8d3acf80aa7260efd13da5"></a>
@@ -219,6 +237,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Command to submit and save the GitHub token to file. </p>
 
 </div>
 </div>

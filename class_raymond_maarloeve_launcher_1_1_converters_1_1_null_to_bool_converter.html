@@ -98,20 +98,28 @@ $(document).ready(function(){initNavTree('class_raymond_maarloeve_launcher_1_1_c
   <div class="headertitle"><div class="title">RaymondMaarloeveLauncher.Converters.NullToBoolConverter Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Converts a null value to a boolean, with optional inversion.  
+ <a href="class_raymond_maarloeve_launcher_1_1_converters_1_1_null_to_bool_converter.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a55235026dcde1980e81b50b5688a285d"><td class="memItemLeft" align="right" valign="top">object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_converters_1_1_null_to_bool_converter.html#a55235026dcde1980e81b50b5688a285d">Convert</a> (object? value, Type targetType, object? parameter, CultureInfo culture)</td></tr>
+<tr class="memdesc:a55235026dcde1980e81b50b5688a285d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a value to a boolean indicating whether it is not null, with optional inversion.  <br /></td></tr>
 <tr class="separator:a55235026dcde1980e81b50b5688a285d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae14b92ef8352aa1309cafbd109b7a20d"><td class="memItemLeft" align="right" valign="top">object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_converters_1_1_null_to_bool_converter.html#ae14b92ef8352aa1309cafbd109b7a20d">ConvertBack</a> (object? value, Type targetType, object? parameter, CultureInfo culture)</td></tr>
+<tr class="memdesc:ae14b92ef8352aa1309cafbd109b7a20d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not implemented. Throws a NotImplementedException if called.  <br /></td></tr>
 <tr class="separator:ae14b92ef8352aa1309cafbd109b7a20d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a7faaab76f70c45bb204f034f8a1ca0ed"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_converters_1_1_null_to_bool_converter.html#a7faaab76f70c45bb204f034f8a1ca0ed">Invert</a> = false<code> [get, set]</code></td></tr>
+<tr class="memdesc:a7faaab76f70c45bb204f034f8a1ca0ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets a value indicating whether the result should be inverted.  <br /></td></tr>
 <tr class="separator:a7faaab76f70c45bb204f034f8a1ca0ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Converts a null value to a boolean, with optional inversion. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a55235026dcde1980e81b50b5688a285d" name="a55235026dcde1980e81b50b5688a285d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a55235026dcde1980e81b50b5688a285d">&#9670;&#160;</a></span>Convert()</h2>
 
@@ -149,6 +157,18 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Converts a value to a boolean indicating whether it is not null, with optional inversion. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The value produced by the binding source.</td></tr>
+    <tr><td class="paramname">targetType</td><td>The type of the binding target property.</td></tr>
+    <tr><td class="paramname">parameter</td><td>The converter parameter to use.</td></tr>
+    <tr><td class="paramname">culture</td><td>The culture to use in the converter.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the value is not null (or false if Invert is true); otherwise, false (or true if Invert is true).</dd></dl>
 
 </div>
 </div>
@@ -190,6 +210,24 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Not implemented. Throws a NotImplementedException if called. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The value that is produced by the binding target.</td></tr>
+    <tr><td class="paramname">targetType</td><td>The type to convert to.</td></tr>
+    <tr><td class="paramname">parameter</td><td>The converter parameter to use.</td></tr>
+    <tr><td class="paramname">culture</td><td>The culture to use in the converter.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Nothing. Always throws.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">NotImplementedException</td><td>Always thrown.</td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Property Documentation</h2>
@@ -212,6 +250,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Gets or sets a value indicating whether the result should be inverted. </p>
 
 </div>
 </div>

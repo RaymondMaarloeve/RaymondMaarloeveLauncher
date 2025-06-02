@@ -99,42 +99,61 @@ $(document).ready(function(){initNavTree('class_raymond_maarloeve_launcher_1_1_v
   <div class="headertitle"><div class="title">RaymondMaarloeveLauncher.ViewModels.HuggingFacePageViewModel Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>ViewModel for the Hugging Face page, responsible for managing available and local models, downloading models, and updating configuration.  
+ <a href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a650fa5e72376c8e3a5d9e53f97b685c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#a650fa5e72376c8e3a5d9e53f97b685c4">HuggingFacePageViewModel</a> ()</td></tr>
+<tr class="memdesc:a650fa5e72376c8e3a5d9e53f97b685c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the HuggingFacePageViewModel class. Sets up commands and loads models.  <br /></td></tr>
 <tr class="separator:a650fa5e72376c8e3a5d9e53f97b685c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:ad33a34e7ce26250503eab2cac3fc17ef"><td class="memItemLeft" align="right" valign="top">ObservableCollection&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#ad33a34e7ce26250503eab2cac3fc17ef">AvailableModels</a> = new()<code> [get]</code></td></tr>
+<tr class="memdesc:ad33a34e7ce26250503eab2cac3fc17ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of models available for download from Hugging Face.  <br /></td></tr>
 <tr class="separator:ad33a34e7ce26250503eab2cac3fc17ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc51f164985bad2eabc22229704fbc85"><td class="memItemLeft" align="right" valign="top">ObservableCollection&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#acc51f164985bad2eabc22229704fbc85">LocalModels</a> = new()<code> [get]</code></td></tr>
+<tr class="memdesc:acc51f164985bad2eabc22229704fbc85"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of models available locally.  <br /></td></tr>
 <tr class="separator:acc51f164985bad2eabc22229704fbc85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1fad132f269ad982e4615905ecc16b3"><td class="memItemLeft" align="right" valign="top">string?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#ab1fad132f269ad982e4615905ecc16b3">SelectedModel</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:ab1fad132f269ad982e4615905ecc16b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the selected model from Hugging Face.  <br /></td></tr>
 <tr class="separator:ab1fad132f269ad982e4615905ecc16b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a745f47c0475bb84d6d32fea9f990d976"><td class="memItemLeft" align="right" valign="top">string?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#a745f47c0475bb84d6d32fea9f990d976">SelectedLocalModel</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a745f47c0475bb84d6d32fea9f990d976"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the selected local model.  <br /></td></tr>
 <tr class="separator:a745f47c0475bb84d6d32fea9f990d976"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2eaf622d0c129c99167f5f7927d791b6"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#a2eaf622d0c129c99167f5f7927d791b6">DownloadStatus</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a2eaf622d0c129c99167f5f7927d791b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the download status message.  <br /></td></tr>
 <tr class="separator:a2eaf622d0c129c99167f5f7927d791b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4394cf663a086b5bab8188cb618ef607"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#a4394cf663a086b5bab8188cb618ef607">LocalModelsStatus</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a4394cf663a086b5bab8188cb618ef607"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the local models status message.  <br /></td></tr>
 <tr class="separator:a4394cf663a086b5bab8188cb618ef607"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a740dedbd3346bf1337c9104041d23452"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#a740dedbd3346bf1337c9104041d23452">DownloadProgress</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a740dedbd3346bf1337c9104041d23452"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the download progress percentage.  <br /></td></tr>
 <tr class="separator:a740dedbd3346bf1337c9104041d23452"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c5a432c0f4167fe56a87c2cbf7295ce"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#a4c5a432c0f4167fe56a87c2cbf7295ce">ProgressText</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a4c5a432c0f4167fe56a87c2cbf7295ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the progress text.  <br /></td></tr>
 <tr class="separator:a4c5a432c0f4167fe56a87c2cbf7295ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98b8d4c1dfb495c493dc7a883b3e61b1"><td class="memItemLeft" align="right" valign="top">ReactiveCommand&lt; Unit, Unit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#a98b8d4c1dfb495c493dc7a883b3e61b1">DownloadModelCommand</a><code> [get]</code></td></tr>
+<tr class="memdesc:a98b8d4c1dfb495c493dc7a883b3e61b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to download the selected model from Hugging Face.  <br /></td></tr>
 <tr class="separator:a98b8d4c1dfb495c493dc7a883b3e61b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a294a2b6c0b152558508e4508916479c1"><td class="memItemLeft" align="right" valign="top">ReactiveCommand&lt; Unit, Unit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#a294a2b6c0b152558508e4508916479c1">LoadModelsCommand</a><code> [get]</code></td></tr>
+<tr class="memdesc:a294a2b6c0b152558508e4508916479c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to load available models from Hugging Face.  <br /></td></tr>
 <tr class="separator:a294a2b6c0b152558508e4508916479c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b35d370ac0a5ab5ccf5a493b19797e5"><td class="memItemLeft" align="right" valign="top">ReactiveCommand&lt; Unit, Unit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#a4b35d370ac0a5ab5ccf5a493b19797e5">LoadLocalModelsCommand</a><code> [get]</code></td></tr>
+<tr class="memdesc:a4b35d370ac0a5ab5ccf5a493b19797e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to load local models from disk.  <br /></td></tr>
 <tr class="separator:a4b35d370ac0a5ab5ccf5a493b19797e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab68aaa177500e91f3021966e79a067c3"><td class="memItemLeft" align="right" valign="top">ReactiveCommand&lt; Unit, Unit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#ab68aaa177500e91f3021966e79a067c3">DeleteModelCommand</a><code> [get]</code></td></tr>
+<tr class="memdesc:ab68aaa177500e91f3021966e79a067c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to delete the selected local model.  <br /></td></tr>
 <tr class="separator:ab68aaa177500e91f3021966e79a067c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab87a8c9bd61341db7e31fd5442578840"><td class="memItemLeft" align="right" valign="top">ReactiveCommand&lt; Unit, Unit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_hugging_face_page_view_model.html#ab87a8c9bd61341db7e31fd5442578840">SaveToJsonCommand</a><code> [get]</code></td></tr>
+<tr class="memdesc:ab87a8c9bd61341db7e31fd5442578840"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to save the current model list to the configuration file.  <br /></td></tr>
 <tr class="separator:ab87a8c9bd61341db7e31fd5442578840"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>ViewModel for the Hugging Face page, responsible for managing available and local models, downloading models, and updating configuration. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a650fa5e72376c8e3a5d9e53f97b685c4" name="a650fa5e72376c8e3a5d9e53f97b685c4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a650fa5e72376c8e3a5d9e53f97b685c4">&#9670;&#160;</a></span>HuggingFacePageViewModel()</h2>
 
@@ -149,6 +168,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes a new instance of the HuggingFacePageViewModel class. Sets up commands and loads models. </p>
 
 </div>
 </div>
@@ -173,6 +194,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>List of models available for download from Hugging Face. </p>
+
 </div>
 </div>
 <a id="ab68aaa177500e91f3021966e79a067c3" name="ab68aaa177500e91f3021966e79a067c3"></a>
@@ -194,6 +217,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Command to delete the selected local model. </p>
 
 </div>
 </div>
@@ -217,6 +242,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Command to download the selected model from Hugging Face. </p>
+
 </div>
 </div>
 <a id="a740dedbd3346bf1337c9104041d23452" name="a740dedbd3346bf1337c9104041d23452"></a>
@@ -238,6 +265,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Gets or sets the download progress percentage. </p>
 
 </div>
 </div>
@@ -261,6 +290,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Gets or sets the download status message. </p>
+
 </div>
 </div>
 <a id="a4b35d370ac0a5ab5ccf5a493b19797e5" name="a4b35d370ac0a5ab5ccf5a493b19797e5"></a>
@@ -282,6 +313,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Command to load local models from disk. </p>
 
 </div>
 </div>
@@ -305,6 +338,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Command to load available models from Hugging Face. </p>
+
 </div>
 </div>
 <a id="acc51f164985bad2eabc22229704fbc85" name="acc51f164985bad2eabc22229704fbc85"></a>
@@ -326,6 +361,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>List of models available locally. </p>
 
 </div>
 </div>
@@ -349,6 +386,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Gets or sets the local models status message. </p>
+
 </div>
 </div>
 <a id="a4c5a432c0f4167fe56a87c2cbf7295ce" name="a4c5a432c0f4167fe56a87c2cbf7295ce"></a>
@@ -370,6 +409,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Gets or sets the progress text. </p>
 
 </div>
 </div>
@@ -393,6 +434,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Command to save the current model list to the configuration file. </p>
+
 </div>
 </div>
 <a id="a745f47c0475bb84d6d32fea9f990d976" name="a745f47c0475bb84d6d32fea9f990d976"></a>
@@ -415,6 +458,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Gets or sets the selected local model. </p>
+
 </div>
 </div>
 <a id="ab1fad132f269ad982e4615905ecc16b3" name="ab1fad132f269ad982e4615905ecc16b3"></a>
@@ -436,6 +481,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Gets or sets the selected model from Hugging Face. </p>
 
 </div>
 </div>

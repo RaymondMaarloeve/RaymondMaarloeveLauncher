@@ -97,15 +97,22 @@ $(document).ready(function(){initNavTree('class_raymond_maarloeve_launcher_1_1_v
   <div class="headertitle"><div class="title">RaymondMaarloeveLauncher.ViewLocator Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Locates and instantiates views for corresponding view models by naming convention.  
+ <a href="class_raymond_maarloeve_launcher_1_1_view_locator.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a3c2fbd3634427c73f47179461bdb4e42"><td class="memItemLeft" align="right" valign="top">Control?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_locator.html#a3c2fbd3634427c73f47179461bdb4e42">Build</a> (object? param)</td></tr>
+<tr class="memdesc:a3c2fbd3634427c73f47179461bdb4e42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a view for the given view model parameter by replacing 'ViewModel' with 'View' in the type name.  <br /></td></tr>
 <tr class="separator:a3c2fbd3634427c73f47179461bdb4e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a524f9b6dd553fe3f1208350f1e1ec2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_locator.html#a3a524f9b6dd553fe3f1208350f1e1ec2">Match</a> (object? data)</td></tr>
+<tr class="memdesc:a3a524f9b6dd553fe3f1208350f1e1ec2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines whether the data object is a ViewModelBase and can be matched to a view.  <br /></td></tr>
 <tr class="separator:a3a524f9b6dd553fe3f1208350f1e1ec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Locates and instantiates views for corresponding view models by naming convention. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a3c2fbd3634427c73f47179461bdb4e42" name="a3c2fbd3634427c73f47179461bdb4e42"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c2fbd3634427c73f47179461bdb4e42">&#9670;&#160;</a></span>Build()</h2>
 
@@ -121,6 +128,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Builds a view for the given view model parameter by replacing 'ViewModel' with 'View' in the type name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">param</td><td>The view model instance.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The corresponding view as a Control, or a TextBlock if not found.</dd></dl>
 
 </div>
 </div>
@@ -139,6 +155,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Determines whether the data object is a ViewModelBase and can be matched to a view. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>The data object to check.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the data is a ViewModelBase; otherwise, false.</dd></dl>
 
 </div>
 </div>

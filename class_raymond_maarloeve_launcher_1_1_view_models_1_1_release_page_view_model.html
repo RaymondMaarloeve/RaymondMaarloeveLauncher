@@ -98,40 +98,58 @@ $(document).ready(function(){initNavTree('class_raymond_maarloeve_launcher_1_1_v
   <div class="headertitle"><div class="title">RaymondMaarloeveLauncher.ViewModels.ReleasePageViewModel Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>ViewModel for the release page, responsible for managing and downloading game and server releases.  
+ <a href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a72d87621667cccdfa786a0d7b3f46ab7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#a72d87621667cccdfa786a0d7b3f46ab7">ReleasePageViewModel</a> ()</td></tr>
+<tr class="memdesc:a72d87621667cccdfa786a0d7b3f46ab7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the ReleasePageViewModel class. Loads releases and sets up download commands.  <br /></td></tr>
 <tr class="separator:a72d87621667cccdfa786a0d7b3f46ab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a7a02d113b7682a9909d004357763cb1d"><td class="memItemLeft" align="right" valign="top">ObservableCollection&lt; Release &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#a7a02d113b7682a9909d004357763cb1d">Releases</a> = new()<code> [get]</code></td></tr>
+<tr class="memdesc:a7a02d113b7682a9909d004357763cb1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of game releases available for download.  <br /></td></tr>
 <tr class="separator:a7a02d113b7682a9909d004357763cb1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a503006c991d8d37c54b3c0f278c625"><td class="memItemLeft" align="right" valign="top">ObservableCollection&lt; Release &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#a9a503006c991d8d37c54b3c0f278c625">ServerReleases</a> = new()<code> [get]</code></td></tr>
+<tr class="memdesc:a9a503006c991d8d37c54b3c0f278c625"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of server releases available for download.  <br /></td></tr>
 <tr class="separator:a9a503006c991d8d37c54b3c0f278c625"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35b1c994af740229ff65745065afc1e8"><td class="memItemLeft" align="right" valign="top">Release&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#a35b1c994af740229ff65745065afc1e8">SelectedRelease</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a35b1c994af740229ff65745065afc1e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the selected game release.  <br /></td></tr>
 <tr class="separator:a35b1c994af740229ff65745065afc1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05ce7501e4b97e7e5c5bd74824262c61"><td class="memItemLeft" align="right" valign="top">Release&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#a05ce7501e4b97e7e5c5bd74824262c61">SelectedServerRelease</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a05ce7501e4b97e7e5c5bd74824262c61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the selected server release.  <br /></td></tr>
 <tr class="separator:a05ce7501e4b97e7e5c5bd74824262c61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d3f91748180a8bdfec55f08c95ccf09"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#a0d3f91748180a8bdfec55f08c95ccf09">DownloadProgress</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a0d3f91748180a8bdfec55f08c95ccf09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the download progress percentage for the game release.  <br /></td></tr>
 <tr class="separator:a0d3f91748180a8bdfec55f08c95ccf09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4bdcc9076514628d36528c6f82b29c4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#ac4bdcc9076514628d36528c6f82b29c4">ServerDownloadProgress</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:ac4bdcc9076514628d36528c6f82b29c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the download progress percentage for the server release.  <br /></td></tr>
 <tr class="separator:ac4bdcc9076514628d36528c6f82b29c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc274f099c2e6615b1af4994a405eb33"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#afc274f099c2e6615b1af4994a405eb33">ProgressText</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:afc274f099c2e6615b1af4994a405eb33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the progress text for the game release download.  <br /></td></tr>
 <tr class="separator:afc274f099c2e6615b1af4994a405eb33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c7ce5a9d746b7927a56c47a6ed2b771"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#a2c7ce5a9d746b7927a56c47a6ed2b771">ServerProgressText</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a2c7ce5a9d746b7927a56c47a6ed2b771"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the progress text for the server release download.  <br /></td></tr>
 <tr class="separator:a2c7ce5a9d746b7927a56c47a6ed2b771"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a7d1b044d7c4fb83d9cc811e92a44cd"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#a3a7d1b044d7c4fb83d9cc811e92a44cd">DownloadStatus</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a3a7d1b044d7c4fb83d9cc811e92a44cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the download status message for the game release.  <br /></td></tr>
 <tr class="separator:a3a7d1b044d7c4fb83d9cc811e92a44cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f62ea8a8eac620e69f8ab0447a3102d"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#a6f62ea8a8eac620e69f8ab0447a3102d">ServerDownloadStatus</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a6f62ea8a8eac620e69f8ab0447a3102d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the download status message for the server release.  <br /></td></tr>
 <tr class="separator:a6f62ea8a8eac620e69f8ab0447a3102d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7c296d5791266a2c52d956578b84d13"><td class="memItemLeft" align="right" valign="top">ReactiveCommand&lt; Unit, Unit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#ab7c296d5791266a2c52d956578b84d13">DownloadSelectedReleaseCommand</a><code> [get]</code></td></tr>
+<tr class="memdesc:ab7c296d5791266a2c52d956578b84d13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to download the selected game release.  <br /></td></tr>
 <tr class="separator:ab7c296d5791266a2c52d956578b84d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f5abadb166360db95cabf2dc59fa605"><td class="memItemLeft" align="right" valign="top">ReactiveCommand&lt; Unit, Unit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#a0f5abadb166360db95cabf2dc59fa605">DownloadSelectedServerReleaseCommand</a><code> [get]</code></td></tr>
+<tr class="memdesc:a0f5abadb166360db95cabf2dc59fa605"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to download the selected server release.  <br /></td></tr>
 <tr class="separator:a0f5abadb166360db95cabf2dc59fa605"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>ViewModel for the release page, responsible for managing and downloading game and server releases. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a72d87621667cccdfa786a0d7b3f46ab7" name="a72d87621667cccdfa786a0d7b3f46ab7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a72d87621667cccdfa786a0d7b3f46ab7">&#9670;&#160;</a></span>ReleasePageViewModel()</h2>
 
@@ -146,6 +164,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes a new instance of the ReleasePageViewModel class. Loads releases and sets up download commands. </p>
 
 </div>
 </div>
@@ -170,6 +190,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Gets or sets the download progress percentage for the game release. </p>
+
 </div>
 </div>
 <a id="ab7c296d5791266a2c52d956578b84d13" name="ab7c296d5791266a2c52d956578b84d13"></a>
@@ -191,6 +213,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Command to download the selected game release. </p>
 
 </div>
 </div>
@@ -214,6 +238,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Command to download the selected server release. </p>
+
 </div>
 </div>
 <a id="a3a7d1b044d7c4fb83d9cc811e92a44cd" name="a3a7d1b044d7c4fb83d9cc811e92a44cd"></a>
@@ -235,6 +261,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Gets or sets the download status message for the game release. </p>
 
 </div>
 </div>
@@ -258,6 +286,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Gets or sets the progress text for the game release download. </p>
+
 </div>
 </div>
 <a id="a7a02d113b7682a9909d004357763cb1d" name="a7a02d113b7682a9909d004357763cb1d"></a>
@@ -279,6 +309,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Collection of game releases available for download. </p>
 
 </div>
 </div>
@@ -302,6 +334,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Gets or sets the selected game release. </p>
+
 </div>
 </div>
 <a id="a05ce7501e4b97e7e5c5bd74824262c61" name="a05ce7501e4b97e7e5c5bd74824262c61"></a>
@@ -323,6 +357,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Gets or sets the selected server release. </p>
 
 </div>
 </div>
@@ -346,6 +382,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Gets or sets the download progress percentage for the server release. </p>
+
 </div>
 </div>
 <a id="a6f62ea8a8eac620e69f8ab0447a3102d" name="a6f62ea8a8eac620e69f8ab0447a3102d"></a>
@@ -367,6 +405,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Gets or sets the download status message for the server release. </p>
 
 </div>
 </div>
@@ -390,6 +430,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Gets or sets the progress text for the server release download. </p>
+
 </div>
 </div>
 <a id="a9a503006c991d8d37c54b3c0f278c625" name="a9a503006c991d8d37c54b3c0f278c625"></a>
@@ -411,6 +453,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Collection of server releases available for download. </p>
 
 </div>
 </div>

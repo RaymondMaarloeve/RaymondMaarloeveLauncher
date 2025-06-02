@@ -98,32 +98,46 @@ $(document).ready(function(){initNavTree('class_raymond_maarloeve_launcher_1_1_v
   <div class="headertitle"><div class="title">RaymondMaarloeveLauncher.ViewModels.NpcConfigPageViewModel Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>ViewModel for the NPC configuration page, responsible for managing NPCs and their associated models.  
+ <a href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab446f65a98e69c71fa80fa7d6c0a0348"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#ab446f65a98e69c71fa80fa7d6c0a0348">NpcConfigPageViewModel</a> ()</td></tr>
+<tr class="memdesc:ab446f65a98e69c71fa80fa7d6c0a0348"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the NpcConfigPageViewModel class. Loads available models, sets up commands, and loads NPC configuration from JSON.  <br /></td></tr>
 <tr class="separator:ab446f65a98e69c71fa80fa7d6c0a0348"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a671f6a4f775e9deed619af8adb1f119d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#a671f6a4f775e9deed619af8adb1f119d">LoadNpcConfigFromJson</a> ()</td></tr>
+<tr class="memdesc:a671f6a4f775e9deed619af8adb1f119d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the NPC configuration from the configuration file and populates the NPC and model collections.  <br /></td></tr>
 <tr class="separator:a671f6a4f775e9deed619af8adb1f119d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9a7204b07f164095c5967e9f676960d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#aa9a7204b07f164095c5967e9f676960d">SaveNpcConfigToJson</a> ()</td></tr>
+<tr class="memdesc:aa9a7204b07f164095c5967e9f676960d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the current NPC configuration to the configuration file.  <br /></td></tr>
 <tr class="separator:aa9a7204b07f164095c5967e9f676960d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7fd690720a5a395d45d32adef7d41cdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#a7fd690720a5a395d45d32adef7d41cdb">Dispose</a> ()</td></tr>
+<tr class="memdesc:a7fd690720a5a395d45d32adef7d41cdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disposes of resources used by the view model.  <br /></td></tr>
 <tr class="separator:a7fd690720a5a395d45d32adef7d41cdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:acc0e09c5c1acf1d650c64cba4dded879"><td class="memItemLeft" align="right" valign="top">ObservableCollection&lt; <a class="el" href="class_raymond_maarloeve_launcher_1_1_models_1_1_npc_model.html">NpcModel</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#acc0e09c5c1acf1d650c64cba4dded879">Npcs</a> = new()<code> [get]</code></td></tr>
+<tr class="memdesc:acc0e09c5c1acf1d650c64cba4dded879"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of NPCs displayed and managed in the UI.  <br /></td></tr>
 <tr class="separator:acc0e09c5c1acf1d650c64cba4dded879"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a840db4b2bff26b54359bb9d7c11137c9"><td class="memItemLeft" align="right" valign="top">ObservableCollection&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#a840db4b2bff26b54359bb9d7c11137c9">AvailableModels</a> = new()<code> [get]</code></td></tr>
+<tr class="memdesc:a840db4b2bff26b54359bb9d7c11137c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of available model names for NPC assignment.  <br /></td></tr>
 <tr class="separator:a840db4b2bff26b54359bb9d7c11137c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0161ce1588b5adb69665546b77662598"><td class="memItemLeft" align="right" valign="top">ReactiveCommand&lt; <a class="el" href="class_raymond_maarloeve_launcher_1_1_models_1_1_npc_model.html">NpcModel</a>, Unit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#a0161ce1588b5adb69665546b77662598">RemoveNpcCommand</a><code> [get]</code></td></tr>
+<tr class="memdesc:a0161ce1588b5adb69665546b77662598"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to remove an NPC from the collection.  <br /></td></tr>
 <tr class="separator:a0161ce1588b5adb69665546b77662598"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16d6cfdaeca30f7fd5b8e4686042525f"><td class="memItemLeft" align="right" valign="top">ReactiveCommand&lt; Unit, Unit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#a16d6cfdaeca30f7fd5b8e4686042525f">AddNpcCommand</a><code> [get]</code></td></tr>
+<tr class="memdesc:a16d6cfdaeca30f7fd5b8e4686042525f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to add a new NPC to the collection.  <br /></td></tr>
 <tr class="separator:a16d6cfdaeca30f7fd5b8e4686042525f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e2cd198690d9c1327b252e51a463768"><td class="memItemLeft" align="right" valign="top">ReactiveCommand&lt; Unit, Unit &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#a0e2cd198690d9c1327b252e51a463768">SaveCommand</a><code> [get]</code></td></tr>
+<tr class="memdesc:a0e2cd198690d9c1327b252e51a463768"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command to save the current NPC configuration to a JSON file.  <br /></td></tr>
 <tr class="separator:a0e2cd198690d9c1327b252e51a463768"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>ViewModel for the NPC configuration page, responsible for managing NPCs and their associated models. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab446f65a98e69c71fa80fa7d6c0a0348" name="ab446f65a98e69c71fa80fa7d6c0a0348"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab446f65a98e69c71fa80fa7d6c0a0348">&#9670;&#160;</a></span>NpcConfigPageViewModel()</h2>
 
@@ -138,6 +152,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes a new instance of the NpcConfigPageViewModel class. Loads available models, sets up commands, and loads NPC configuration from JSON. </p>
 
 </div>
 </div>
@@ -157,6 +173,8 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Disposes of resources used by the view model. </p>
+
 </div>
 </div>
 <a id="a671f6a4f775e9deed619af8adb1f119d" name="a671f6a4f775e9deed619af8adb1f119d"></a>
@@ -174,6 +192,8 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Loads the NPC configuration from the configuration file and populates the NPC and model collections. </p>
+
 </div>
 </div>
 <a id="aa9a7204b07f164095c5967e9f676960d" name="aa9a7204b07f164095c5967e9f676960d"></a>
@@ -190,6 +210,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Saves the current NPC configuration to the configuration file. </p>
 
 </div>
 </div>
@@ -214,6 +236,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Command to add a new NPC to the collection. </p>
+
 </div>
 </div>
 <a id="a840db4b2bff26b54359bb9d7c11137c9" name="a840db4b2bff26b54359bb9d7c11137c9"></a>
@@ -235,6 +259,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Collection of available model names for NPC assignment. </p>
 
 </div>
 </div>
@@ -258,6 +284,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Collection of NPCs displayed and managed in the UI. </p>
+
 </div>
 </div>
 <a id="a0161ce1588b5adb69665546b77662598" name="a0161ce1588b5adb69665546b77662598"></a>
@@ -280,6 +308,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Command to remove an NPC from the collection. </p>
+
 </div>
 </div>
 <a id="a0e2cd198690d9c1327b252e51a463768" name="a0e2cd198690d9c1327b252e51a463768"></a>
@@ -301,6 +331,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Command to save the current NPC configuration to a JSON file. </p>
 
 </div>
 </div>

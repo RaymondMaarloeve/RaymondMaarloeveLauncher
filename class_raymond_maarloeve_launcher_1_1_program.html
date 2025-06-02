@@ -97,15 +97,22 @@ $(document).ready(function(){initNavTree('class_raymond_maarloeve_launcher_1_1_p
   <div class="headertitle"><div class="title">RaymondMaarloeveLauncher.Program Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>The main entry point for the <a class="el" href="namespace_raymond_maarloeve_launcher.html">RaymondMaarloeveLauncher</a> application. Responsible for application startup and Avalonia configuration.  
+ <a href="class_raymond_maarloeve_launcher_1_1_program.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ae73c23e33b2fbe09f705ced8ab279584"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_program.html#ae73c23e33b2fbe09f705ced8ab279584">Main</a> (string[] args)</td></tr>
+<tr class="memdesc:ae73c23e33b2fbe09f705ced8ab279584"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application initialization code. Do not use any Avalonia, third-party APIs, or SynchronizationContext-reliant code before AppMain is called.  <br /></td></tr>
 <tr class="separator:ae73c23e33b2fbe09f705ced8ab279584"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91c94f1a6a2c89c0fb5ab1451bc3c8cc"><td class="memItemLeft" align="right" valign="top">static AppBuilder&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raymond_maarloeve_launcher_1_1_program.html#a91c94f1a6a2c89c0fb5ab1451bc3c8cc">BuildAvaloniaApp</a> ()</td></tr>
+<tr class="memdesc:a91c94f1a6a2c89c0fb5ab1451bc3c8cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures Avalonia for the application. Do not remove; also used by the visual designer.  <br /></td></tr>
 <tr class="separator:a91c94f1a6a2c89c0fb5ab1451bc3c8cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The main entry point for the <a class="el" href="namespace_raymond_maarloeve_launcher.html">RaymondMaarloeveLauncher</a> application. Responsible for application startup and Avalonia configuration. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a91c94f1a6a2c89c0fb5ab1451bc3c8cc" name="a91c94f1a6a2c89c0fb5ab1451bc3c8cc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a91c94f1a6a2c89c0fb5ab1451bc3c8cc">&#9670;&#160;</a></span>BuildAvaloniaApp()</h2>
 
@@ -128,6 +135,9 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Configures Avalonia for the application. Do not remove; also used by the visual designer. </p>
+<dl class="section return"><dt>Returns</dt><dd>The configured AppBuilder instance.</dd></dl>
 
 </div>
 </div>
@@ -154,6 +164,14 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Application initialization code. Do not use any Avalonia, third-party APIs, or SynchronizationContext-reliant code before AppMain is called. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Command-line arguments.</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
