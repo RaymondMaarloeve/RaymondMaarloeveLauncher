@@ -13,74 +13,137 @@ using Avalonia.Controls.ApplicationLifetimes;
 
 namespace RaymondMaarloeveLauncher.ViewModels;
 
+/// <summary>
+/// ViewModel for the release page, responsible for managing and downloading game and server releases.
+/// </summary>
 public class ReleasePageViewModel : ViewModelBase
 {
-
+    /// <summary>
+    /// Collection of game releases available for download.
+    /// </summary>
     public ObservableCollection<Release> Releases { get; } = new();
+    /// <summary>
+    /// Collection of server releases available for download.
+    /// </summary>
     public ObservableCollection<Release> ServerReleases { get; } = new();
     
-    
+    /// <summary>
+    /// The currently selected game release.
+    /// </summary>
     private Release _selectedRelease;
+    /// <summary>
+    /// Gets or sets the selected game release.
+    /// </summary>
     public Release SelectedRelease
     {
         get => _selectedRelease;
         set => this.RaiseAndSetIfChanged(ref _selectedRelease, value);
     }
     
+    /// <summary>
+    /// The currently selected server release.
+    /// </summary>
     private Release _selectedServerRelease;
+    /// <summary>
+    /// Gets or sets the selected server release.
+    /// </summary>
     public Release SelectedServerRelease
     {
         get => _selectedServerRelease;
         set => this.RaiseAndSetIfChanged(ref _selectedServerRelease, value);
     }
 
+    /// <summary>
+    /// Progress of the current game release download (0-100).
+    /// </summary>
     private double _downloadProgress;
+    /// <summary>
+    /// Gets or sets the download progress percentage for the game release.
+    /// </summary>
     public double DownloadProgress
     {
         get => _downloadProgress;
         set => this.RaiseAndSetIfChanged(ref _downloadProgress, value);
     }
     
+    /// <summary>
+    /// Progress of the current server release download (0-100).
+    /// </summary>
     private double _serverDownloadProgress;
+    /// <summary>
+    /// Gets or sets the download progress percentage for the server release.
+    /// </summary>
     public double ServerDownloadProgress
     {
         get => _serverDownloadProgress;
         set => this.RaiseAndSetIfChanged(ref _serverDownloadProgress, value);
     }
 
+    /// <summary>
+    /// Text representation of the current game release download progress.
+    /// </summary>
     private string _progressText = "";
+    /// <summary>
+    /// Gets or sets the progress text for the game release download.
+    /// </summary>
     public string ProgressText
     {
         get => _progressText;
         set => this.RaiseAndSetIfChanged(ref _progressText, value);
     }
     
+    /// <summary>
+    /// Text representation of the current server release download progress.
+    /// </summary>
     private string _serverProgressText = "";
+    /// <summary>
+    /// Gets or sets the progress text for the server release download.
+    /// </summary>
     public string ServerProgressText
     {
         get => _serverProgressText;
         set => this.RaiseAndSetIfChanged(ref _serverProgressText, value);
     }
     
-
-    
+    /// <summary>
+    /// Status message for the game release download process.
+    /// </summary>
     private string _downloadStatus;
+    /// <summary>
+    /// Gets or sets the download status message for the game release.
+    /// </summary>
     public string DownloadStatus
     {
         get => _downloadStatus;
         set => this.RaiseAndSetIfChanged(ref _downloadStatus, value);
     }
     
+    /// <summary>
+    /// Status message for the server release download process.
+    /// </summary>
     private string _serverDownloadStatus;
+    /// <summary>
+    /// Gets or sets the download status message for the server release.
+    /// </summary>
     public string ServerDownloadStatus
     {
         get => _serverDownloadStatus;
         set => this.RaiseAndSetIfChanged(ref _serverDownloadStatus, value);
     }
     
+    /// <summary>
+    /// Command to download the selected game release.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> DownloadSelectedReleaseCommand { get; }
+    /// <summary>
+    /// Command to download the selected server release.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> DownloadSelectedServerReleaseCommand { get; }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ReleasePageViewModel"/> class.
+    /// Loads releases and sets up download commands.
+    /// </summary>
     public ReleasePageViewModel()
     {
         try
@@ -95,6 +158,9 @@ public class ReleasePageViewModel : ViewModelBase
         DownloadSelectedReleaseCommand = ReactiveCommand.CreateFromTask(DownloadSelectedReleaseAsync);
         DownloadSelectedServerReleaseCommand = ReactiveCommand.CreateFromTask(DownloadSelecterServerReleaseAsync);
     }
+    /// <summary>
+    /// Loads the list of available game and server releases from GitHub.
+    /// </summary>
     private async void LoadReleases()
     {
         // var client = new GitHubClient(new ProductHeaderValue("GameLauncher"));
@@ -111,7 +177,9 @@ public class ReleasePageViewModel : ViewModelBase
         foreach (var release in serverReleases)
             ServerReleases.Add(release);
     }
-    
+    /// <summary>
+    /// Downloads the selected game release and extracts it if necessary.
+    /// </summary>
     private async Task DownloadSelectedReleaseAsync()
     {
         try
@@ -219,7 +287,9 @@ public class ReleasePageViewModel : ViewModelBase
             DownloadStatus = $"❌ Unexpected error: {ex.Message}";
         }
     }
-
+    /// <summary>
+    /// Downloads the selected server release and saves it to the server directory.
+    /// </summary>
     private async Task DownloadSelecterServerReleaseAsync()
     {
         try

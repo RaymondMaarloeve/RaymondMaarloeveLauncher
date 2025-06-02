@@ -3,11 +3,26 @@ using Octokit;
 
 namespace RaymondMaarloeveLauncher.ViewModels;
 
+/// <summary>
+/// Provides methods for authenticating and interacting with the GitHub API.
+/// </summary>
 public static class GitHubService
 {
+    /// <summary>
+    /// Cached instance of the GitHubClient.
+    /// </summary>
     private static GitHubClient? _client;
+    /// <summary>
+    /// Status message describing the current authentication state with GitHub.
+    /// </summary>
     public static string GithubStatus { get; private set; } = "";
 
+    /// <summary>
+    /// Gets an authenticated or unauthenticated GitHubClient instance.
+    /// If a token is found in GITHUBTOKEN.txt, uses it for authentication.
+    /// Otherwise, returns a client in unauthenticated mode (60 requests/hour limit).
+    /// </summary>
+    /// <returns>A GitHubClient instance, authenticated if possible.</returns>
     public static GitHubClient GetClient()
     {
         if (_client != null)

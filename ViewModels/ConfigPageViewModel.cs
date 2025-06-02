@@ -10,25 +10,49 @@ using RaymondMaarloeveLauncher.Models;
 
 namespace RaymondMaarloeveLauncher.ViewModels;
 
+/// <summary>
+/// ViewModel for the configuration page, responsible for managing game and model settings.
+/// </summary>
 public class ConfigPageViewModel : ReactiveObject
 {
+    /// <summary>
+    /// Path to the configuration file.
+    /// </summary>
     private const string ConfigPath = "game_config.json";
 
+    /// <summary>
+    /// The base URL of the LLM server API.
+    /// </summary>
     private string _llmServerApi = "http://127.0.0.1:5000/";
+    /// <summary>
+    /// Gets or sets the LLM server API URL.
+    /// </summary>
     public string LlmServerApi
     {
         get => _llmServerApi;
         set => this.RaiseAndSetIfChanged(ref _llmServerApi, value);
     }
 
+    /// <summary>
+    /// The path to the LLM model directory.
+    /// </summary>
     private string _llmModelPath = "";
+    /// <summary>
+    /// Gets or sets the LLM model directory path.
+    /// </summary>
     public string LlmModelPath
     {
         get => _llmModelPath;
         set => this.RaiseAndSetIfChanged(ref _llmModelPath, value);
     }
     
+    /// <summary>
+    /// Indicates whether the application is using localhost for the LLM server.
+    /// </summary>
     private bool _localhost = true;
+    /// <summary>
+    /// Gets or sets a value indicating whether localhost is used for the LLM server.
+    /// </summary>
     public bool Localhost
     {
         get => _localhost;
@@ -43,6 +67,9 @@ public class ConfigPageViewModel : ReactiveObject
         }
     }
 
+    /// <summary>
+    /// Loads local model files from the Models directory and updates the configuration.
+    /// </summary>
     private void LoadLocalModels()
     {
         Directory.CreateDirectory("Models");
@@ -68,20 +95,35 @@ public class ConfigPageViewModel : ReactiveObject
         File.WriteAllText(ConfigPath, result);
     }
 
+    /// <summary>
+    /// Indicates whether the game should run in fullscreen mode.
+    /// </summary>
     private bool _fullScreen = false;
+    /// <summary>
+    /// Gets or sets a value indicating whether the game is in fullscreen mode.
+    /// </summary>
     public bool FullScreen
     {
         get => _fullScreen;
         set => this.RaiseAndSetIfChanged(ref _fullScreen, value);
     }
 
+    /// <summary>
+    /// The current game window resolution as a string (e.g., "1920x1080").
+    /// </summary>
     private string _resolution = "1920x1080";
+    /// <summary>
+    /// Gets or sets the game window resolution.
+    /// </summary>
     public string Resolution
     {
         get => _resolution;
         set => this.RaiseAndSetIfChanged(ref _resolution, value);
     }
 
+    /// <summary>
+    /// List of available screen resolutions.
+    /// </summary>
     public string[] AvailableResolutions { get; } = new[]
     {
         "1280x720",
@@ -91,9 +133,18 @@ public class ConfigPageViewModel : ReactiveObject
         "3840x2160"
     };
 
+    /// <summary>
+    /// Command to save the current configuration.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> SaveCommand { get; }
+    /// <summary>
+    /// Command to fetch available models from the server.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> GetModelsCommand { get; }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ConfigPageViewModel"/> class.
+    /// </summary>
     public ConfigPageViewModel()
     {
         SaveCommand = ReactiveCommand.Create(SaveConfig);
@@ -101,6 +152,9 @@ public class ConfigPageViewModel : ReactiveObject
         LoadConfig();
     }
 
+    /// <summary>
+    /// Fetches the list of models from the LLM server and updates the configuration file.
+    /// </summary>
     private async void GetModels()
     {
         using var client = new HttpClient();
@@ -114,7 +168,6 @@ public class ConfigPageViewModel : ReactiveObject
             var response = await client.PostAsync($"{LlmServerApi}list-files", content);
             var responseStr = await response.Content.ReadAsStringAsync();
             
-            // Deserializacja do odpowiedniego typu
             var serverResponse = JsonSerializer.Deserialize<Root>(responseStr);
             
             if (serverResponse?.success == true && serverResponse.files != null)
@@ -123,7 +176,6 @@ public class ConfigPageViewModel : ReactiveObject
                     ? JsonSerializer.Deserialize<GameData>(File.ReadAllText(ConfigPath)) 
                     : new GameData();
             
-            // Konwersja z FileInfo na ModelData
                 existingConfig.Models = serverResponse.files.Select((file, index) => new ModelData
                 {
                     Id = index,
@@ -146,6 +198,9 @@ public class ConfigPageViewModel : ReactiveObject
             LlmModelPath = string.Empty;
         }
     }
+    /// <summary>
+    /// Loads the configuration from the configuration file.
+    /// </summary>
     private void LoadConfig()
     {
         if (!File.Exists(ConfigPath))
@@ -165,6 +220,9 @@ public class ConfigPageViewModel : ReactiveObject
         Resolution = $"{config.GameWindowWidth}x{config.GameWindowHeight}";
     }
 
+    /// <summary>
+    /// Saves the current configuration to the configuration file.
+    /// </summary>
     private void SaveConfig()
     {
         var parts = Resolution.Split('x');

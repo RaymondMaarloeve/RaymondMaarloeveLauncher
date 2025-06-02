@@ -13,66 +13,133 @@ using RaymondMaarloeveLauncher.Models;
 
 namespace RaymondMaarloeveLauncher.ViewModels;
 
+/// <summary>
+/// ViewModel for the Hugging Face page, responsible for managing available and local models,
+/// downloading models, and updating configuration.
+/// </summary>
 public class HuggingFacePageViewModel : ReactiveObject
 {
+    /// <summary>
+    /// Shared HTTP client for API requests.
+    /// </summary>
     private static readonly HttpClient _httpClient = new();
 
+    /// <summary>
+    /// List of models available for download from Hugging Face.
+    /// </summary>
     public ObservableCollection<string> AvailableModels { get; } = new();
-    
+    /// <summary>
+    /// List of models available locally.
+    /// </summary>
     public ObservableCollection<string> LocalModels { get; } = new();
 
+    /// <summary>
+    /// The currently selected model from Hugging Face.
+    /// </summary>
     private string? _selectedModel;
+    /// <summary>
+    /// Gets or sets the selected model from Hugging Face.
+    /// </summary>
     public string? SelectedModel
     {
         get => _selectedModel;
         set => this.RaiseAndSetIfChanged(ref _selectedModel, value);
     }
     
+    /// <summary>
+    /// The currently selected local model.
+    /// </summary>
     private string? _selectedLocalModel;
+    /// <summary>
+    /// Gets or sets the selected local model.
+    /// </summary>
     public string? SelectedLocalModel
     {
         get => _selectedLocalModel;
         set => this.RaiseAndSetIfChanged(ref _selectedLocalModel, value);
     }
 
+    /// <summary>
+    /// Status message for the download process.
+    /// </summary>
     private string _downloadStatus = "";
+    /// <summary>
+    /// Gets or sets the download status message.
+    /// </summary>
     public string DownloadStatus
     {
         get => _downloadStatus;
         set => this.RaiseAndSetIfChanged(ref _downloadStatus, value);
     }
 
+    /// <summary>
+    /// Status message for local models operations.
+    /// </summary>
     private string _localModelsStatus = "";
-
+    /// <summary>
+    /// Gets or sets the local models status message.
+    /// </summary>
     public string LocalModelsStatus
     {
         get => _localModelsStatus;
         set => this.RaiseAndSetIfChanged(ref _localModelsStatus, value);
     }
     
+    /// <summary>
+    /// Progress of the current download operation (0-100).
+    /// </summary>
     private double _downloadProgress;
+    /// <summary>
+    /// Gets or sets the download progress percentage.
+    /// </summary>
     public double DownloadProgress
     {
         get => _downloadProgress;
         set => this.RaiseAndSetIfChanged(ref _downloadProgress, value);
     }
 
+    /// <summary>
+    /// Text representation of the current progress.
+    /// </summary>
     private string _progressText = "";
+    /// <summary>
+    /// Gets or sets the progress text.
+    /// </summary>
     public string ProgressText
     {
         get => _progressText;
         set => this.RaiseAndSetIfChanged(ref _progressText, value);
     }
 
+    /// <summary>
+    /// Command to download the selected model from Hugging Face.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> DownloadModelCommand { get; }
+    /// <summary>
+    /// Command to load available models from Hugging Face.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> LoadModelsCommand { get; }
-    
+    /// <summary>
+    /// Command to load local models from disk.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> LoadLocalModelsCommand { get; }
-    
+    /// <summary>
+    /// Command to delete the selected local model.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> DeleteModelCommand { get; }
+    /// <summary>
+    /// Command to save the current model list to the configuration file.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> SaveToJsonCommand { get; }
+    /// <summary>
+    /// Path to the configuration file.
+    /// </summary>
     private const string ConfigPath = "game_config.json";
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="HuggingFacePageViewModel"/> class.
+    /// Sets up commands and loads models.
+    /// </summary>
     public HuggingFacePageViewModel()
     {
         DownloadModelCommand = ReactiveCommand.CreateFromTask(DownloadSelectedModelAsync);
@@ -87,6 +154,9 @@ public class HuggingFacePageViewModel : ReactiveObject
         _ = LoadAvailableModelsAsync();
     }
 
+    /// <summary>
+    /// Saves the list of local models to the configuration file.
+    /// </summary>
     private void SaveToJson()
     {
         Directory.CreateDirectory("Models");
@@ -112,6 +182,9 @@ public class HuggingFacePageViewModel : ReactiveObject
         File.WriteAllText(ConfigPath, result);
     }
 
+    /// <summary>
+    /// Loads the list of available models from Hugging Face.
+    /// </summary>
     private async Task LoadAvailableModelsAsync()
     {
         const string repoId = "wujoq/Reymond_Tuning";
@@ -144,6 +217,9 @@ public class HuggingFacePageViewModel : ReactiveObject
         }
     }
 
+    /// <summary>
+    /// Downloads the selected model from Hugging Face and saves it locally.
+    /// </summary>
     private async Task DownloadSelectedModelAsync()
     {
         if (SelectedModel is null) return;
@@ -193,12 +269,24 @@ public class HuggingFacePageViewModel : ReactiveObject
         }
     }
 
+    /// <summary>
+    /// Represents a file entry from the Hugging Face API.
+    /// </summary>
     private class HfFile
     {
+        /// <summary>
+        /// The type of the file (e.g., "file", "folder").
+        /// </summary>
         public string type { get; set; } = "";
+        /// <summary>
+        /// The path of the file.
+        /// </summary>
         public string path { get; set; } = "";
     }
     
+    /// <summary>
+    /// Loads the list of local models from disk.
+    /// </summary>
     private async Task LoadLocalModelsAsync()
     {
         try
@@ -216,6 +304,9 @@ public class HuggingFacePageViewModel : ReactiveObject
         }
     }
 
+    /// <summary>
+    /// Deletes the selected local model from disk.
+    /// </summary>
     private async Task DeleteSelectedLocalModelAsync()
     {
         if (SelectedLocalModel is null)

@@ -10,20 +10,51 @@ using ReactiveUI;
 
 namespace RaymondMaarloeveLauncher.ViewModels;
 
+/// <summary>
+/// ViewModel for the NPC configuration page, responsible for managing NPCs and their associated models.
+/// </summary>
 public class NpcConfigPageViewModel : ReactiveObject, IDisposable
 {
+    /// <summary>
+    /// Collection of NPCs displayed and managed in the UI.
+    /// </summary>
     public ObservableCollection<NpcModel> Npcs { get; } = new();
+    /// <summary>
+    /// Collection of available model names for NPC assignment.
+    /// </summary>
     public ObservableCollection<string> AvailableModels { get; } = new();
 
+    /// <summary>
+    /// Command to remove an NPC from the collection.
+    /// </summary>
     public ReactiveCommand<NpcModel, Unit> RemoveNpcCommand { get; }
+    /// <summary>
+    /// Command to add a new NPC to the collection.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> AddNpcCommand { get; }
+    /// <summary>
+    /// Command to save the current NPC configuration to a JSON file.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> SaveCommand { get; }
 
+    /// <summary>
+    /// Path to the configuration file.
+    /// </summary>
     private const string ConfigPath = "game_config.json";
+    /// <summary>
+    /// Path to the folder containing model files.
+    /// </summary>
     private const string ModelsFolder = "Models";
     
+    /// <summary>
+    /// Subscription for startup initialization.
+    /// </summary>
     private readonly IDisposable _startupSubscription;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NpcConfigPageViewModel"/> class.
+    /// Loads available models, sets up commands, and loads NPC configuration from JSON.
+    /// </summary>
     public NpcConfigPageViewModel()
     {
         // Initialization
@@ -42,11 +73,14 @@ public class NpcConfigPageViewModel : ReactiveObject, IDisposable
 
         SaveCommand = ReactiveCommand.Create(SaveNpcConfigToJson);
 
-        // Startowe dane
+        // Startup data
         _startupSubscription = AddNpcCommand.Execute().Subscribe();
         LoadNpcConfigFromJson();
     }
 
+    /// <summary>
+    /// Loads the list of available models from the configuration file.
+    /// </summary>
     private void LoadAvailableModels()
     {
         AvailableModels.Clear();
@@ -69,6 +103,9 @@ public class NpcConfigPageViewModel : ReactiveObject, IDisposable
         }
     }
 
+    /// <summary>
+    /// Loads the NPC configuration from the configuration file and populates the NPC and model collections.
+    /// </summary>
     public void LoadNpcConfigFromJson()
     {
         if (!File.Exists(ConfigPath))
@@ -82,7 +119,7 @@ public class NpcConfigPageViewModel : ReactiveObject, IDisposable
         Npcs.Clear();
         AvailableModels.Clear();
 
-        // Załaduj modele do listy dostępnych modeli
+        // Load models into the list of available models
         foreach (var model in config.Models)
         {
             AvailableModels.Add(model.Name);
@@ -90,7 +127,7 @@ public class NpcConfigPageViewModel : ReactiveObject, IDisposable
 
         foreach (var npc in config.Npcs)
         {
-            // Znajdź nazwę modelu na podstawie ID
+            // Find the model name based on the ID
             var modelName = config.Models.FirstOrDefault(m => m.Id == npc.ModelId)?.Name;
 
             Npcs.Add(new NpcModel(AvailableModels, RemoveNpcCommand)
@@ -101,6 +138,9 @@ public class NpcConfigPageViewModel : ReactiveObject, IDisposable
         }
     }
 
+    /// <summary>
+    /// Saves the current NPC configuration to the configuration file.
+    /// </summary>
     public void SaveNpcConfigToJson()
     {
         GameData config;
@@ -134,6 +174,9 @@ public class NpcConfigPageViewModel : ReactiveObject, IDisposable
         File.WriteAllText(ConfigPath, result);
     }
     
+    /// <summary>
+    /// Disposes of resources used by the view model.
+    /// </summary>
     public void Dispose()
     {
         _startupSubscription.Dispose();

@@ -15,49 +15,97 @@ using Splat.ModeDetection;
 
 namespace RaymondMaarloeveLauncher.ViewModels;
 
+/// <summary>
+/// ViewModel for the main window, responsible for navigation between pages and launching the game.
+/// </summary>
 public class MainWindowViewModel : ViewModelBase
 {
+    /// <summary>
+    /// Command to show the home page.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> ShowHomePageCommand { get; }
+    /// <summary>
+    /// Command to show the release page.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> ShowReleasePageCommand { get; }
+    /// <summary>
+    /// Command to show the Hugging Face page.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> ShowHuggingFacePageCommand { get; }
+    /// <summary>
+    /// Command to show the configuration page.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> ShowConfigPageCommand { get; }
+    /// <summary>
+    /// Command to show the NPC configuration page.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> ShowNpcConfigPageCommand { get; }
-    
+    /// <summary>
+    /// Command to launch the game.
+    /// </summary>
     public ReactiveCommand<Unit, Unit> LaunchGameCommand { get; }
 
+    /// <summary>
+    /// The currently displayed page in the main window.
+    /// </summary>
     private UserControl _currentPage;
+    /// <summary>
+    /// Gets or sets the current page.
+    /// </summary>
     public UserControl CurrentPage
     {
         get => _currentPage;
         set => this.RaiseAndSetIfChanged(ref _currentPage, value);
     }
     
+    /// <summary>
+    /// Status message for the game launch process.
+    /// </summary>
     private string _launchStatus;
+    /// <summary>
+    /// Gets or sets the launch status message.
+    /// </summary>
     public string LaunchStatus
     {
         get => _launchStatus;
         set => this.RaiseAndSetIfChanged(ref _launchStatus, value);
     }
     
+    /// <summary>
+    /// The current version of the game.
+    /// </summary>
     private string _currentVersion = "Not downloaded.";
+    /// <summary>
+    /// Gets or sets the current game version.
+    /// </summary>
     public string CurrentVersion
     {
         get => _currentVersion;
         set => this.RaiseAndSetIfChanged(ref _currentVersion, value);
     }
     
+    /// <summary>
+    /// The body text of the latest release.
+    /// </summary>
     private string _latestReleaseBody;
+    /// <summary>
+    /// Gets or sets the latest release body text.
+    /// </summary>
     public string LatestReleaseBody
     {
         get => _latestReleaseBody;
         set => this.RaiseAndSetIfChanged(ref _latestReleaseBody, value);
     }
 
+    /// <summary>
+    /// Indicates whether the application is using localhost for the server.
+    /// </summary>
     private bool _localhost = true;
     
-
-
-
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
+    /// Sets up commands, creates the config file if needed, and loads the current version and latest release description.
+    /// </summary>
     public MainWindowViewModel()
     {
         CreateConfigFile();
@@ -83,7 +131,7 @@ public class MainWindowViewModel : ViewModelBase
             CurrentPage = new NpcConfigPage();
         });
 
-        CurrentPage = new HomePage(); // ustawienie domyślnego widoku
+        CurrentPage = new HomePage(); // set default view
         
         LaunchGameCommand = ReactiveCommand.Create(LaunchGame);
         
@@ -92,6 +140,9 @@ public class MainWindowViewModel : ViewModelBase
         _ = LoadLatestReleaseDescription();
     }
 
+    /// <summary>
+    /// Creates the configuration file if it does not exist.
+    /// </summary>
     private void CreateConfigFile()
     {
         const string configPath = "game_config.json";
@@ -101,6 +152,9 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
     
+    /// <summary>
+    /// Loads the latest release description from GitHub and formats it for display.
+    /// </summary>
     private async Task LoadLatestReleaseDescription()
     {
         var client = GitHubService.GetClient();
@@ -122,6 +176,11 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
     
+    /// <summary>
+    /// Formats commit lines in markdown as list items.
+    /// </summary>
+    /// <param name="markdown">The markdown string to format.</param>
+    /// <returns>The formatted markdown string.</returns>
     private string FormatMarkdownCommits(string markdown)
     {
         var lines = markdown.Split('\n')
@@ -136,6 +195,11 @@ public class MainWindowViewModel : ViewModelBase
         return string.Join("\n", lines);
     }
     
+    /// <summary>
+    /// Removes the title from the markdown string.
+    /// </summary>
+    /// <param name="markdown">The markdown string to process.</param>
+    /// <returns>The markdown string without the title.</returns>
     private string RemoveMarkdownTitle(string markdown)
     {
         if (string.IsNullOrWhiteSpace(markdown))
@@ -149,6 +213,9 @@ public class MainWindowViewModel : ViewModelBase
         return string.Join('\n', lines);
     }
     
+    /// <summary>
+    /// Launches the game and the server if required, handling permissions and process management.
+    /// </summary>
     private void LaunchGame()
     {
         var gameDir = "GameBuild";
@@ -271,6 +338,11 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Reads the 'localhost' setting from the configuration file.
+    /// </summary>
+    /// <param name="configPath">Path to the configuration file.</param>
+    /// <returns>True if localhost is enabled; otherwise, false.</returns>
     private bool ReadLocalhostFromConfig(string configPath)
     {
         try
@@ -288,6 +360,9 @@ public class MainWindowViewModel : ViewModelBase
         return false;
     }
     
+    /// <summary>
+    /// Loads the current game version from the version file.
+    /// </summary>
     public void LoadCurrentVersionFromFile()
     {
         try
