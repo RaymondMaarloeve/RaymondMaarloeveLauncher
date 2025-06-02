@@ -11,13 +11,24 @@ using RaymondMaarloeveLauncher.Views;
 
 namespace RaymondMaarloeveLauncher;
 
+/// <summary>
+/// The main application class for RaymondMaarloeveLauncher.
+/// Responsible for initializing Avalonia, setting up themes, and managing application lifetime events.
+/// </summary>
 public partial class App : Application
 {
+    /// <summary>
+    /// Initializes Avalonia XAML resources for the application.
+    /// </summary>
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
     }
 
+    /// <summary>
+    /// Called when the framework initialization is completed.
+    /// Sets up the main window, applies the selected theme, and disables duplicate data annotation validation.
+    /// </summary>
     public override void OnFrameworkInitializationCompleted()
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
@@ -42,6 +53,9 @@ public partial class App : Application
         base.OnFrameworkInitializationCompleted();
     }
 
+    /// <summary>
+    /// Disables Avalonia's built-in data annotation validation to avoid duplicate validations with CommunityToolkit.
+    /// </summary>
     private void DisableAvaloniaDataAnnotationValidation()
     {
         // Get an array of plugins to remove
