@@ -40,4 +40,9 @@ public class GameData
     /// The list of configured NPCs for the game.
     /// </summary>
     public List<NpcConfig>? Npcs { get; set; }
+
+    /// <summary>
+    /// The identifier of the currently selected narrator model.
+    /// </summary>
+    public int? NarratorModelId { get; set; }
 }

@@ -7,6 +7,13 @@
              x:DataType="vm:NpcConfigPageViewModel">
 
     <StackPanel>
+        <DockPanel Margin="0,0,0,5">
+            <TextBlock Text="Narrator: " VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <ComboBox Width="200"
+                      ItemsSource="{Binding AvailableModels}"
+                      SelectedItem="{Binding SelectedNarratorModel}" />
+        </DockPanel>
+        
         <ItemsControl ItemsSource="{Binding Npcs}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>

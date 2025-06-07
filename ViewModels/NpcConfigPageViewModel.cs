@@ -25,6 +25,16 @@ public class NpcConfigPageViewModel : ReactiveObject, IDisposable
     public ObservableCollection<string> AvailableModels { get; } = new();
 
     /// <summary>
+    /// Holds the current selection of the narrator model from the list of available models.
+    /// </summary>
+    private string? _selectedNarratorModel;
+    public string? SelectedNarratorModel
+    {
+        get => _selectedNarratorModel;
+        set => this.RaiseAndSetIfChanged(ref _selectedNarratorModel, value);
+    }
+
+    /// <summary>
     /// Command to remove an NPC from the collection.
     /// </summary>
     public ReactiveCommand<NpcModel, Unit> RemoveNpcCommand { get; }
@@ -59,9 +69,10 @@ public class NpcConfigPageViewModel : ReactiveObject, IDisposable
     {
         // Initialization
         LoadAvailableModels();
+        
+        SelectedNarratorModel = AvailableModels.FirstOrDefault();
 
         RemoveNpcCommand = ReactiveCommand.Create<NpcModel>(npc => Npcs.Remove(npc));
-
         AddNpcCommand = ReactiveCommand.Create(() =>
         {
             var npc = new NpcModel(AvailableModels, RemoveNpcCommand)
@@ -70,7 +81,6 @@ public class NpcConfigPageViewModel : ReactiveObject, IDisposable
             };
             Npcs.Add(npc);
         });
-
         SaveCommand = ReactiveCommand.Create(SaveNpcConfigToJson);
 
         // Startup data
@@ -136,6 +146,13 @@ public class NpcConfigPageViewModel : ReactiveObject, IDisposable
                 SelectedModel = modelName
             });
         }
+
+        
+        // Set the narrator model based on the configuration. If a narrator model ID is specified,
+        // find its name from the models list, otherwise use the first available model as default
+        SelectedNarratorModel = config.NarratorModelId.HasValue
+            ? config.Models.FirstOrDefault(m => m.Id == config.NarratorModelId.Value)?.Name
+            : AvailableModels.FirstOrDefault();
     }
 
     /// <summary>
@@ -156,13 +173,16 @@ public class NpcConfigPageViewModel : ReactiveObject, IDisposable
         }
         config.Npcs = Npcs.Select((npc, index) =>
         {
-            var modelId = config.Models.FirstOrDefault(m => m.Name == npc.SelectedModel)?.Id ?? -1;
+            var modelId = config.Models?.FirstOrDefault(m => m.Name == npc.SelectedModel)?.Id ?? -1;
             return new NpcConfig
             {
                 Id = index,
                 ModelId = modelId
             };
         }).ToList();
+
+        config.NarratorModelId = config.Models?
+            .FirstOrDefault(m => m.Name == SelectedNarratorModel)?.Id;
 
         var options = new JsonSerializerOptions
         {
