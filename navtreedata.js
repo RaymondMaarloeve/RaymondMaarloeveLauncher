@@ -54,7 +54,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_app_8axaml_8cs.html",
-"class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#afc274f099c2e6615b1af4994a405eb33"
+"class_raymond_maarloeve_launcher_1_1_view_models_1_1_release_page_view_model.html#ab7c296d5791266a2c52d956578b84d13"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

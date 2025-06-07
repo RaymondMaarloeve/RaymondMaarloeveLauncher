@@ -8,5 +8,6 @@ var class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_mo
     [ "AvailableModels", "class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#a840db4b2bff26b54359bb9d7c11137c9", null ],
     [ "Npcs", "class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#acc0e09c5c1acf1d650c64cba4dded879", null ],
     [ "RemoveNpcCommand", "class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#a0161ce1588b5adb69665546b77662598", null ],
-    [ "SaveCommand", "class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#a0e2cd198690d9c1327b252e51a463768", null ]
+    [ "SaveCommand", "class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#a0e2cd198690d9c1327b252e51a463768", null ],
+    [ "SelectedNarratorModel", "class_raymond_maarloeve_launcher_1_1_view_models_1_1_npc_config_page_view_model.html#a2720c31de39e497b66f308047505a1b5", null ]
 ];
