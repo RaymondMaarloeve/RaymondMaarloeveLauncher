@@ -40,6 +40,9 @@ It provides a user-friendly interface to download, manage and launch game builds
    - Go to the **Game Config** section.
    - Adjust settings such as resolution, fullscreen mode, or server address as needed.
 
+6. **Launch the Game**  
+   Click **Launch Game** and wait for the game to open.
+
 ⚠️ **Important**: In **every section**, make sure to **save your changes** before leaving.
 
 ## ✨ Features
