@@ -25,10 +25,12 @@
 var NAVTREE =
 [
   [ "Raymond Maarloeve Launcher", "index.html", [
-    [ "✨ Features", "index.html#autotoc_md1", null ],
-    [ "🧩 Technologies", "index.html#autotoc_md2", null ],
-    [ "🚀 Usage", "index.html#autotoc_md3", null ],
-    [ "🛠 Build instructions", "index.html#autotoc_md4", null ],
+    [ "How to Launch the Game – Quick Guide", "index.html#autotoc_md1", [
+      [ "✨ Features", "index.html#autotoc_md2", null ],
+      [ "🧩 Technologies", "index.html#autotoc_md3", null ],
+      [ "🚀 Usage", "index.html#autotoc_md4", null ],
+      [ "🛠 Build instructions", "index.html#autotoc_md5", null ]
+    ] ],
     [ "Packages", "namespaces.html", [
       [ "Package List", "namespaces.html", "namespaces_dup" ]
     ] ],
