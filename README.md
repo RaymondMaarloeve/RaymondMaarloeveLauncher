@@ -18,6 +18,30 @@ It provides a user-friendly interface to download, manage and launch game builds
   <img src="https://github.com/cyptrix12/RaymondMaarloeveLauncher/blob/master/Preview.png" alt="Launcher Preview" width="600"/>
 </p>
 
+# How to Launch the Game – Quick Guide
+
+1. **Start the Launcher**  
+   Open the `RaymondMaarloeveLauncher`.
+
+2. **Download the Releases**  
+   Go to the **Release** section and download the latest:
+   - **Game release**
+   - **LLM Server release**
+
+3. **Download LLM Models**  
+   Navigate to the **Config LLM Model** section and download **all available models**.
+
+4. **Configure NPCs**  
+   - Go to the **Config NPC's** section.
+   - Assign different models to any number of NPCs you like.
+   - **Important**: Assign the `narrator.gguf` model to the **Narrator**.
+
+5. **(Optional) Configure Game Settings**  
+   - Go to the **Game Config** section.
+   - Adjust settings such as resolution, fullscreen mode, or server address as needed.
+
+⚠️ **Important**: In **every section**, make sure to **save your changes** before leaving.
+
 ## ✨ Features
 
 - 🔍 Fetches list of GitHub releases dynamically
